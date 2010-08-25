@@ -21,17 +21,17 @@
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
-	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
-	<string>org.n8gray.qlcolorcode</string>
+	<string>net.openmolecules.chemlook</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-	<key>CFBundleVersion</key>
-	<string>${CURRENT_PROJECT_VERSION}</string>
+	<key>CFBundleName</key>
+	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleShortVersionString</key>
+	<string>${CURRENT_PROJECT_VERSION}</string>
+	<key>CFBundleVersion</key>
 	<string>${CURRENT_PROJECT_VERSION}</string>
 	<key>CFPlugInDynamicRegisterFunction</key>
 	<string></string>
@@ -51,29 +51,29 @@
 	</dict>
 	<key>CFPlugInUnloadFunction</key>
 	<string></string>
-	<key>QLSupportsConcurrentRequests</key>
-	<false/>
 	<key>QLNeedsToBeRunInMainThread</key>
 	<true/>
-	<key>QLThumbnailMinimumSize</key>
-	<real>32</real>
-	<key>QLPreviewWidth</key>
-	<real>800</real>
 	<key>QLPreviewHeight</key>
 	<real>800</real>
+	<key>QLPreviewWidth</key>
+	<real>800</real>
+	<key>QLSupportsConcurrentRequests</key>
+	<false/>
+	<key>QLThumbnailMinimumSize</key>
+	<real>32</real>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.ocaml.ocaml-source</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://www.ocaml.org/</string>
-			<key>UTTypeDescription</key>
-			<string>OCaml Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>OCaml Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.ocaml.ocaml-source</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://www.ocaml.org/</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -85,16 +85,16 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.ocaml.ocaml-interface</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://www.ocaml.org/</string>
-			<key>UTTypeDescription</key>
-			<string>OCaml Interface File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>OCaml Interface File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.ocaml.ocaml-interface</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://www.ocaml.org/</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -104,16 +104,16 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.haskell.haskell-source</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://www.haskell.org/</string>
-			<key>UTTypeDescription</key>
-			<string>Haskell Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>Haskell Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.haskell.haskell-source</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://www.haskell.org/</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -123,16 +123,16 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.haskell.literate-haskell-source</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://www.haskell.org/</string>
-			<key>UTTypeDescription</key>
-			<string>Literate Haskell Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>Literate Haskell Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.haskell.literate-haskell-source</string>
+			<key>UTTypeReferenceURL</key>
+			<string>http://www.haskell.org/</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -142,14 +142,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.scheme-source</string>
-			<key>UTTypeDescription</key>
-			<string>scheme Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>scheme Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.n8gray.scheme-source</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -159,14 +159,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.ini-source</string>
-			<key>UTTypeDescription</key>
-			<string>.ini Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>.ini Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.n8gray.ini-source</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -203,14 +203,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.erlang.erlang-source</string>
-			<key>UTTypeDescription</key>
-			<string>Erlang Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>Erlang Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.erlang.erlang-source</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -221,14 +221,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.standard-ml-source</string>
-			<key>UTTypeDescription</key>
-			<string>Standard ML Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>Standard ML Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.n8gray.standard-ml-source</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -238,14 +238,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.structured-query-language-source</string>
-			<key>UTTypeDescription</key>
-			<string>SQL Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>SQL Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.n8gray.structured-query-language-source</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -255,14 +255,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.diff-script</string>
-			<key>UTTypeDescription</key>
-			<string>Diff File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.script</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>Diff File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.n8gray.diff-script</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -273,14 +273,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>public.css</string>
-			<key>UTTypeDescription</key>
-			<string>CSS File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>CSS File</string>
+			<key>UTTypeIdentifier</key>
+			<string>public.css</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -290,14 +290,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.lua.lua-source</string>
-			<key>UTTypeDescription</key>
-			<string>Lua Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>Lua Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.lua.lua-source</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -307,14 +307,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>tk.tcl.tcl-source</string>
-			<key>UTTypeDescription</key>
-			<string>Tcl Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>Tcl Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>tk.tcl.tcl-source</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -324,14 +324,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.jsp-source</string>
-			<key>UTTypeDescription</key>
-			<string>JSP Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>JSP Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.n8gray.jsp-source</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -341,14 +341,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>com.adobe.actionscript</string>
-			<key>UTTypeDescription</key>
-			<string>Adobe Flash ActionScript Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>Adobe Flash ActionScript Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.adobe.actionscript</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -358,14 +358,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.lisp</string>
-			<key>UTTypeDescription</key>
-			<string>Lisp Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>Lisp Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.n8gray.lisp</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -378,14 +378,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.idl</string>
-			<key>UTTypeDescription</key>
-			<string>IDL Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>IDL Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.n8gray.idl</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -395,14 +395,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.verilog</string>
-			<key>UTTypeDescription</key>
-			<string>Verilog Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>Verilog Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.n8gray.verilog</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -412,14 +412,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.vhdl</string>
-			<key>UTTypeDescription</key>
-			<string>VHDL Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>VHDL Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.n8gray.vhdl</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -429,14 +429,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.xhtml</string>
-			<key>UTTypeDescription</key>
-			<string>XHTML Source File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>XHTML Source File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.n8gray.xhtml</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -446,14 +446,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.javaInstaller</string>
-			<key>UTTypeDescription</key>
-			<string>Java Web Installer (XML)</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.xml</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>Java Web Installer (XML)</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.n8gray.javaInstaller</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -554,14 +554,14 @@
 			</dict>
 		</dict>
 		<dict>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.bogusextension</string>
-			<key>UTTypeDescription</key>
-			<string>QLColorCode Test File</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.source-code</string>
 			</array>
+			<key>UTTypeDescription</key>
+			<string>QLColorCode Test File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.n8gray.bogusextension</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

@@ -26,15 +26,8 @@
 		0E8776580D08E004005040B4 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8776560D08E004005040B4 /* Common.m */; };
 		0E8776B70D08ED64005040B4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8776B60D08ED64005040B4 /* WebKit.framework */; };
 		0E8776BD0D08EDA4005040B4 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8776BC0D08EDA4005040B4 /* AppKit.framework */; };
-		0E913A0A0D10B8060067BAD6 /* filetypes.conf in Copy .conf Files */ = {isa = PBXBuildFile; fileRef = 0E913A090D10B8060067BAD6 /* filetypes.conf */; };
 		0EB495D50D0FB13C00E86E0B /* colorize.sh in Resources */ = {isa = PBXBuildFile; fileRef = 0ECBBB5D0CFD447E00416538 /* colorize.sh */; };
-		0EB496B10D0FC70D00E86E0B /* ml.lang in Copy .lang Files */ = {isa = PBXBuildFile; fileRef = 0EB4960D0D0FC24000E86E0B /* ml.lang */; };
 		0EC047970CFBDADF009C986E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EC047960CFBDADF009C986E /* Foundation.framework */; };
-		0ECBBA6C0CFCA37500416538 /* QLColorCode.qlgenerator in Copy to Library */ = {isa = PBXBuildFile; fileRef = 8D576316048677EA00EA77CD /* QLColorCode.qlgenerator */; };
-		0EF57D440D122791006084D5 /* ide-xcode.style in Copy .style Files */ = {isa = PBXBuildFile; fileRef = 0EF57D430D122791006084D5 /* ide-xcode.style */; };
-		0EF57D6E0D122934006084D5 /* objc.lang in Copy .lang Files */ = {isa = PBXBuildFile; fileRef = 0EF57D6D0D122934006084D5 /* objc.lang */; };
-		0EF57E6A0D125AB2006084D5 /* slateGreen.style in Copy .style Files */ = {isa = PBXBuildFile; fileRef = 0EF57E690D125AB2006084D5 /* slateGreen.style */; };
-		0EF57F2F0D128219006084D5 /* c.lang in Copy .lang Files */ = {isa = PBXBuildFile; fileRef = 0EF57F2E0D128219006084D5 /* c.lang */; };
 		2C05A19C06CAA52B00D84F6F /* GeneratePreviewForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C05A19B06CAA52B00D84F6F /* GeneratePreviewForURL.m */; };
 		61E3BCFB0870B4F2002186A0 /* GenerateThumbnailForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.m */; };
 		8D576312048677EA00EA77CD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB77B6FE84183AC02AAC07 /* main.c */; settings = {ATTRIBUTES = (); }; };
@@ -62,7 +55,6 @@
 			dstPath = override/config;
 			dstSubfolderSpec = 7;
 			files = (
-				0E913A0A0D10B8060067BAD6 /* filetypes.conf in Copy .conf Files */,
 			);
 			name = "Copy .conf Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,9 +65,6 @@
 			dstPath = override/langDefs;
 			dstSubfolderSpec = 7;
 			files = (
-				0EF57F2F0D128219006084D5 /* c.lang in Copy .lang Files */,
-				0EF57D6E0D122934006084D5 /* objc.lang in Copy .lang Files */,
-				0EB496B10D0FC70D00E86E0B /* ml.lang in Copy .lang Files */,
 			);
 			name = "Copy .lang Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,7 +75,6 @@
 			dstPath = "${HOME}/Library/QuickLook/";
 			dstSubfolderSpec = 0;
 			files = (
-				0ECBBA6C0CFCA37500416538 /* QLColorCode.qlgenerator in Copy to Library */,
 			);
 			name = "Copy to Library";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,8 +85,6 @@
 			dstPath = override/themes;
 			dstSubfolderSpec = 7;
 			files = (
-				0EF57E6A0D125AB2006084D5 /* slateGreen.style in Copy .style Files */,
-				0EF57D440D122791006084D5 /* ide-xcode.style in Copy .style Files */,
 			);
 			name = "Copy .style Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,25 +95,18 @@
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		08FB77B6FE84183AC02AAC07 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
-		0E51C65F0D04E492007853CB /* ChangeLog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ChangeLog.txt; sourceTree = "<group>"; };
 		0E8776550D08E004005040B4 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		0E8776560D08E004005040B4 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		0E8776B60D08ED64005040B4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = SDKs/MacOSX10.5.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		0E8776BC0D08EDA4005040B4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = SDKs/MacOSX10.5.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
-		0E913A090D10B8060067BAD6 /* filetypes.conf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = filetypes.conf; sourceTree = "<group>"; };
-		0EB4960D0D0FC24000E86E0B /* ml.lang */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ml.lang; sourceTree = "<group>"; };
 		0EC047960CFBDADF009C986E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = SDKs/MacOSX10.5.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		0EC047F20CFC000A009C986E /* Notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Notes.txt; sourceTree = "<group>"; };
 		0ECBBB360CFCF98600416538 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
 		0ECBBB5D0CFD447E00416538 /* colorize.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = colorize.sh; sourceTree = "<group>"; };
-		0EF57D430D122791006084D5 /* ide-xcode.style */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ide-xcode.style"; sourceTree = "<group>"; };
-		0EF57D6D0D122934006084D5 /* objc.lang */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = objc.lang; sourceTree = "<group>"; };
 		0EF57E4D0D123DD0006084D5 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		0EF57E690D125AB2006084D5 /* slateGreen.style */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = slateGreen.style; sourceTree = "<group>"; };
-		0EF57F2E0D128219006084D5 /* c.lang */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = c.lang; sourceTree = "<group>"; };
 		2C05A19B06CAA52B00D84F6F /* GeneratePreviewForURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratePreviewForURL.m; sourceTree = "<group>"; };
 		61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GenerateThumbnailForURL.m; sourceTree = "<group>"; };
-		8D576316048677EA00EA77CD /* QLColorCode.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QLColorCode.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
+		83C212541225A97E00E22A0B /* ChemLook.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChemLook.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C86B05260671AA6E00DD9006 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		F28CFBFC0A3EC0AF000ABFF5 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -157,7 +136,6 @@
 			children = (
 				0EC047F20CFC000A009C986E /* Notes.txt */,
 				0ECBBB360CFCF98600416538 /* ReadMe.txt */,
-				0E51C65F0D04E492007853CB /* ChangeLog.txt */,
 				0EF57E4D0D123DD0006084D5 /* LICENSE.txt */,
 				08FB77AFFE84173DC02AAC07 /* Source */,
 				089C167CFE841241C02AAC07 /* Resources */,
@@ -184,12 +162,6 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0EF57F2E0D128219006084D5 /* c.lang */,
-				0EB4960D0D0FC24000E86E0B /* ml.lang */,
-				0EF57D6D0D122934006084D5 /* objc.lang */,
-				0EF57D430D122791006084D5 /* ide-xcode.style */,
-				0EF57E690D125AB2006084D5 /* slateGreen.style */,
-				0E913A090D10B8060067BAD6 /* filetypes.conf */,
 				8D576317048677EA00EA77CD /* Info.plist */,
 				8D5B49A704867FD3000E48DA /* InfoPlist.strings */,
 			);
@@ -212,7 +184,7 @@
 		19C28FB6FE9D52B211CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D576316048677EA00EA77CD /* QLColorCode.qlgenerator */,
+				83C212541225A97E00E22A0B /* ChemLook.qlgenerator */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -231,9 +203,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8D57630D048677EA00EA77CD /* QLColorCode */ = {
+		8D57630D048677EA00EA77CD /* ChemLook */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2CA3261E0896AD4900168862 /* Build configuration list for PBXNativeTarget "QLColorCode" */;
+			buildConfigurationList = 2CA3261E0896AD4900168862 /* Build configuration list for PBXNativeTarget "ChemLook" */;
 			buildPhases = (
 				8D57630E048677EA00EA77CD /* Headers */,
 				8D57630F048677EA00EA77CD /* Resources */,
@@ -250,10 +222,10 @@
 			);
 			dependencies = (
 			);
-			name = QLColorCode;
+			name = ChemLook;
 			productInstallPath = /Library/QuickLook;
 			productName = QLColorCode;
-			productReference = 8D576316048677EA00EA77CD /* QLColorCode.qlgenerator */;
+			productReference = 83C212541225A97E00E22A0B /* ChemLook.qlgenerator */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -261,14 +233,17 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 2CA326220896AD4900168862 /* Build configuration list for PBXProject "QLColorCode" */;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 2CA326220896AD4900168862 /* Build configuration list for PBXProject "ChemLook" */;
 			compatibilityVersion = "Xcode 3.0";
 			hasScannedForEncodings = 1;
 			mainGroup = 089C166AFE841209C02AAC07 /* QLColorCode */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D57630D048677EA00EA77CD /* QLColorCode */,
+				8D57630D048677EA00EA77CD /* ChemLook */,
 				0E0E34E90D0097020086C1E6 /* Package */,
 			);
 		};
@@ -349,7 +324,7 @@
 /* Begin PBXTargetDependency section */
 		0E0E34EE0D0097280086C1E6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8D57630D048677EA00EA77CD /* QLColorCode */;
+			target = 8D57630D048677EA00EA77CD /* ChemLook */;
 			targetProxy = 0E0E34ED0D0097280086C1E6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -402,7 +377,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/QuickLook;
 				OTHER_CFLAGS = "-DDEBUG";
-				PRODUCT_NAME = QLColorCode;
+				PRODUCT_NAME = ChemLook;
 				WRAPPER_EXTENSION = qlgenerator;
 				ZERO_LINK = YES;
 			};
@@ -429,6 +404,7 @@
 			buildSettings = {
 				CURRENT_PROJECT_VERSION = 2.0.2;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
@@ -464,7 +440,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2CA3261E0896AD4900168862 /* Build configuration list for PBXNativeTarget "QLColorCode" */ = {
+		2CA3261E0896AD4900168862 /* Build configuration list for PBXNativeTarget "ChemLook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2CA3261F0896AD4900168862 /* Debug */,
@@ -473,7 +449,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2CA326220896AD4900168862 /* Build configuration list for PBXProject "QLColorCode" */ = {
+		2CA326220896AD4900168862 /* Build configuration list for PBXProject "ChemLook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2CA326230896AD4900168862 /* Debug */,
