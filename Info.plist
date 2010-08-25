@@ -11,11 +11,15 @@
 			<string>QLGenerator</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>public.source-code</string>
-				<string>public.xml</string>
-				<string>com.apple.property-list</string>
-				<string>org.tug.tex</string>
-				<string>public.plain-text</string>
+				<string>net.sourceforge.openbabel.gpr</string>
+				<string>net.sourceforge.openbabel.mol2</string>
+				<string>net.sourceforge.openbabel.xyz</string>
+				<string>net.sourceforge.openbabel.pdb</string>
+				<string>net.sourceforge.openbabel.cml</string>
+				<string>net.sourceforge.openbabel.mdl</string>
+				<string>net.sourceforge.openbabel.cdx</string>
+				<string>net.sourceforge.openbabel.cdxml</string>
+				<string>net.sourceforge.openbabel.smiles</string>
 			</array>
 		</dict>
 	</array>
@@ -39,14 +43,14 @@
 	<string>NO</string>
 	<key>CFPlugInFactories</key>
 	<dict>
-		<key>C044543D-70A1-46D8-A908-4B8AEA1197A4</key>
+		<key>95122804-D95A-4D5C-B642-077ECF95303D</key>
 		<string>QuickLookGeneratorPluginFactory</string>
 	</dict>
 	<key>CFPlugInTypes</key>
 	<dict>
 		<key>5E2D9680-5022-40FA-B806-43349622E5B9</key>
 		<array>
-			<string>C044543D-70A1-46D8-A908-4B8AEA1197A4</string>
+			<string>95122804-D95A-4D5C-B642-077ECF95303D</string>
 		</array>
 	</dict>
 	<key>CFPlugInUnloadFunction</key>
@@ -66,561 +70,195 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.source-code</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>OCaml Source File</string>
+			<string>Ghemical Project</string>
 			<key>UTTypeIdentifier</key>
-			<string>org.ocaml.ocaml-source</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://www.ocaml.org/</string>
+			<string>net.sourceforge.openbabel.gpr</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
+				<key>net.sourceforge.openbabel.ostype</key>
+				<string>GPRfile</string>
 				<key>public.filename-extension</key>
 				<array>
-					<string>ml</string>
-					<string>mll</string>
-					<string>mly</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>OCaml Interface File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.ocaml.ocaml-interface</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://www.ocaml.org/</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>mli</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Haskell Source File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.haskell.haskell-source</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://www.haskell.org/</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>hs</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Literate Haskell Source File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.haskell.literate-haskell-source</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://www.haskell.org/</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>lhs</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>scheme Source File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.scheme-source</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>scm</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>.ini Source File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.ini-source</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>ini</string>
+					<string>gpr</string>
 				</array>
 				<key>public.mime-type</key>
-				<string>text/x-ini</string>
+				<string>chemical/x-ghemical-project</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.text</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>TeX text file</string>
+			<string>Sybyl Mol2 document</string>
 			<key>UTTypeIdentifier</key>
-			<string>org.tug.tex</string>
+			<string>net.sourceforge.openbabel.mol2</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
-				<key>com.apple.ostype</key>
-				<string>TEXT</string>
+				<key>net.sourceforge.openbabel.ostype</key>
+				<string>Mol2file</string>
 				<key>public.filename-extension</key>
 				<array>
-					<string>tex</string>
-					<string>latex</string>
-					<string>ltx</string>
-					<string>texi</string>
-					<string>ctx</string>
-					<string>sty</string>
-					<string>cls</string>
+					<string>mol2</string>
 				</array>
+				<key>public.mime-type</key>
+				<string>chemical/x-mol2</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.source-code</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Erlang Source File</string>
+			<string>XYZ Molecule document</string>
 			<key>UTTypeIdentifier</key>
-			<string>org.erlang.erlang-source</string>
+			<string>net.sourceforge.openbabel.xyz</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
+				<key>net.sourceforge.openbabel.ostype</key>
+				<string>XYZfile</string>
 				<key>public.filename-extension</key>
 				<array>
-					<string>erl</string>
-					<string>hrl</string>
+					<string>xyz</string>
 				</array>
+				<key>public.mime-type</key>
+				<string>chemical/x-xyz</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.source-code</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Standard ML Source File</string>
+			<string>Protein Databank document</string>
 			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.standard-ml-source</string>
+			<string>net.sourceforge.openbabel.pdb</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
+				<key>net.sourceforge.openbabel.ostype</key>
+				<string>XYZfile</string>
 				<key>public.filename-extension</key>
 				<array>
-					<string>sml</string>
+					<string>pdb</string>
+					<string>ent</string>
 				</array>
+				<key>public.mime-type</key>
+				<string>chemical/x-pdb</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.source-code</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>SQL Source File</string>
+			<string>MDL Molfile document</string>
 			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.structured-query-language-source</string>
+			<string>net.sourceforge.openbabel.mdl</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
+				<key>net.sourceforge.openbabel.ostype</key>
+				<string>MDLfile</string>
 				<key>public.filename-extension</key>
 				<array>
-					<string>sql</string>
+					<string>mdl</string>
+					<string>mol</string>
+					<string>sdf</string>
 				</array>
+				<key>public.mime-type</key>
+				<string>chemical/x-molfile</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.script</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Diff File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.diff-script</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>diff</string>
-					<string>patch</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>CSS File</string>
-			<key>UTTypeIdentifier</key>
-			<string>public.css</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>css</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Lua Source File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.lua.lua-source</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>lua</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Tcl Source File</string>
-			<key>UTTypeIdentifier</key>
-			<string>tk.tcl.tcl-source</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>tcl</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>JSP Source File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.jsp-source</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>jsp</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Adobe Flash ActionScript Source File</string>
-			<key>UTTypeIdentifier</key>
-			<string>com.adobe.actionscript</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>as</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Lisp Source File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.lisp</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>lisp</string>
-					<string>lsp</string>
-					<string>asd</string>
-					<string>el</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>IDL Source File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.idl</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>pro</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Verilog Source File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.verilog</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>v</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>VHDL Source File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.vhdl</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>vhdl</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>XHTML Source File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.xhtml</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>xhtml</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
+				<string>public.data</string>
 				<string>public.xml</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Java Web Installer (XML)</string>
+			<string>Chemical Markup Language document</string>
 			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.javaInstaller</string>
+			<string>net.sourceforge.openbabel.cml</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
+				<key>net.sourceforge.openbabel.ostype</key>
+				<string>CMLfile</string>
 				<key>public.filename-extension</key>
 				<array>
-					<string>jnlp</string>
+					<string>cml</string>
 				</array>
+				<key>public.mime-type</key>
+				<string>chemical/x-cml</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.source-code</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Eiffel source code file</string>
+			<string>ChemDraw document</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.eiffel.source-code</string>
+			<string>net.sourceforge.openbabel.cdx</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
+				<key>net.sourceforge.openbabel.ostype</key>
+				<string>CDXfile</string>
 				<key>public.filename-extension</key>
 				<array>
-					<string>e</string>
+					<string>cdx</string>
 				</array>
+				<key>public.mime-type</key>
+				<string>chemical/x-cdx</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
+				<string>public.data</string>
 				<string>public.xml</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>EiffelStudio project configuration file</string>
+			<string>ChemDraw XML document</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.eiffel.eiffelstudio-project-config</string>
+			<string>net.sourceforge.openbabel.cdxml</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
+				<key>net.sourceforge.openbabel.ostype</key>
+				<string>CDXMLfile</string>
 				<key>public.filename-extension</key>
 				<array>
-					<string>ecf</string>
+					<string>cdxml</string>
 				</array>
+				<key>public.mime-type</key>
+				<string>chemical/x-cdxml</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.source-code</string>
+				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>C# Source File</string>
+			<string>Daylight SMILES document</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.microsoft.csharp-source</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://www.microsoft.com/</string>
+			<string>net.sourceforge.openbabel.smiles</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
+				<key>net.sourceforge.openbabel.ostype</key>
+				<string>SMILESfile</string>
 				<key>public.filename-extension</key>
 				<array>
-					<string>cs</string>
+					<string>smiles</string>
 				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Visual Basic Source File</string>
-			<key>UTTypeIdentifier</key>
-			<string>com.microsoft.vb-source</string>
-			<key>UTTypeReferenceURL</key>
-			<string>http://www.microsoft.com/</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>vb</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Ruby on Rails File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.railstemplate</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>rhtml</string>
-					<string>erb</string>
-					<string>rjs</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>QLColorCode Test File</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.n8gray.bogusextension</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>bogus_extension</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Groovy Source Code</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.codehaus.groovy-source</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>groovy</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Scala Source Code</string>
-			<key>UTTypeIdentifier</key>
-			<string>org.scala-lang.scala</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>scala</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.source-code</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Coldfusion Source Code</string>
-			<key>UTTypeIdentifier</key>
-			<string>com.adobe.coldfusion</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>cfc</string>
-					<string>cfm</string>
-					<string>cfml</string>
-				</array>
+				<key>public.mime-type</key>
+				<string>chemical/x-daylight-smiles</string>
 			</dict>
 		</dict>
 	</array>
