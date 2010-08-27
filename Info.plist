@@ -58,13 +58,15 @@
 	<key>QLNeedsToBeRunInMainThread</key>
 	<true/>
 	<key>QLPreviewHeight</key>
-	<real>800</real>
+	<integer>550</integer>
 	<key>QLPreviewWidth</key>
-	<real>800</real>
+	<integer>550</integer>
 	<key>QLSupportsConcurrentRequests</key>
-	<false/>
+	<true/>
 	<key>QLThumbnailMinimumSize</key>
 	<real>32</real>
+	<key>QLDisableIconCorners</key>
+	<true/>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>

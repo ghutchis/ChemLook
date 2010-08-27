@@ -1,0 +1,45 @@
+<html>
+<head>
+<script type="text/javascript">
+<!-- ChemDoodleWeb-libs.js -->
+%@
+</script>
+<script type="text/javascript">
+<!-- ChemDoodleWeb.js -->
+%@
+</script>
+<script>
+<!-- molecule as SDF -->
+var molecule = '%@';
+var transformer = new TransformCanvas('transformer', 500 * 3/4, 500 * 3/4, true);
+  transformer.specs.atoms_circles_2D = true;
+  transformer.specs.atoms_useJMOLColors = true;
+  transformer.specs.bonds_clearOverlaps_2D = true;
+  transformer.specs.bonds_useJMOLColors = true;
+  transformer.specs.bonds_width_2D = 3;
+  transformer.specs.atoms_display = false;
+  transformer.specs.backgroundColor = 'black';
+  transformer.loadMolecule(readMOL(molecule));
+</script>
+<style>
+    body {
+      background: #000;
+      text-align: center;
+      vertical-align: center;
+      padding: 0px 0px 0px 0px;
+      margin: 0px 0px 0px 0px;
+      overflow: auto;
+    }
+   h1 {
+  text-align: center;
+  color: #FFF;
+  padding: 10px;
+  padding-left: 20px;
+  margin-top: 0px;
+}
+ </style>
+</head>
+<body>
+<h1>%@</h1>
+</body>
+</html>
