@@ -9,17 +9,15 @@
 %@
 </script>
 <script>
-<!-- molecule as SDF -->
+<!-- molecule as SDF or PDB -->
 var molecule = '%@';
 var transformer = new TransformCanvas('transformer', 500 * 3/4, 500 * 3/4, true);
-  transformer.specs.atoms_circles_2D = true;
-  transformer.specs.atoms_useJMOLColors = true;
   transformer.specs.bonds_clearOverlaps_2D = true;
   transformer.specs.bonds_useJMOLColors = true;
   transformer.specs.bonds_width_2D = 3;
   transformer.specs.atoms_display = false;
   transformer.specs.backgroundColor = 'black';
-  transformer.loadMolecule(readMOL(molecule));
+  transformer.loadMolecule(%@(molecule));
 </script>
 <style>
     body {
@@ -30,16 +28,8 @@ var transformer = new TransformCanvas('transformer', 500 * 3/4, 500 * 3/4, true)
       margin: 0px 0px 0px 0px;
       overflow: auto;
     }
-   h1 {
-  text-align: center;
-  color: #FFF;
-  padding: 10px;
-  padding-left: 20px;
-  margin-top: 0px;
-}
  </style>
 </head>
 <body>
-<h1>%@</h1>
 </body>
 </html>
