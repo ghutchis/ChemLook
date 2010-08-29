@@ -54,7 +54,7 @@ NSString *pathOfURL(CFURLRef url)
     return targetCFS;
 }
 
-NSString *babelURL(CFBundleRef bundle, CFURLRef url, int *status)
+NSString *babelURL(CFBundleRef bundle, CFURLRef url, int *status, bool singleMol)
 {
     NSString *output = NULL;
     NSString *targetEsc = pathOfURL(url);
@@ -66,7 +66,8 @@ NSString *babelURL(CFBundleRef bundle, CFURLRef url, int *status)
 	[env addEntriesFromDictionary:[defaults persistentDomainForName:myDomain]];
     
     NSString *cmd = [NSString stringWithFormat:
-                     @"'/usr/local/bin/babel' -l 1 -xs '%@' -omol", 
+                     @"'/usr/local/bin/babel' %@ '%@' -omol",
+					 singleMol ? @"-l 1" : @"--join",
                      targetEsc];
     
     output = runTask(cmd, env, status);

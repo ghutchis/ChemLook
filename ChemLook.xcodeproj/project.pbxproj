@@ -354,7 +354,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/QuickLook;
-				PRODUCT_NAME = QLColorCode;
+				PRODUCT_NAME = ChemLook;
 				WRAPPER_EXTENSION = qlgenerator;
 			};
 			name = Release;

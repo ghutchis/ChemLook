@@ -17,7 +17,7 @@
 				<string>net.sourceforge.openbabel.pdb</string>
 				<string>net.sourceforge.openbabel.cml</string>
 				<string>net.sourceforge.openbabel.mdl</string>
-				<string>net.sourceforge.openbabel.cdx</string>
+				<string>com.cambridgesoft.cdx</string>
 				<string>net.sourceforge.openbabel.cdxml</string>
 				<string>net.sourceforge.openbabel.smiles</string>
 			</array>
@@ -207,7 +207,7 @@
 			<key>UTTypeDescription</key>
 			<string>ChemDraw document</string>
 			<key>UTTypeIdentifier</key>
-			<string>net.sourceforge.openbabel.cdx</string>
+			<string>com.cambridgesoft.cdx</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>net.sourceforge.openbabel.ostype</key>

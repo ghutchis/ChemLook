@@ -54,7 +54,11 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
 	} else {
 		// We need to pass this through babel to read
 		int status;
-		moleculeData = babelURL(bundle, url, &status);
+		// If we have a CDX or CDXML, try to join all molecules into one SDF
+		bool singleMol = !(CFStringCompare(extension, CFSTR("cdx"), kCFCompareCaseInsensitive) == 0
+						   || CFStringCompare(extension, CFSTR("cdxml"), kCFCompareCaseInsensitive) == 0);
+		
+		moleculeData = babelURL(bundle, url, &status, singleMol);
 		if (status != 0 || moleculeData == nil) {
 			// an error occurred
 			NSLog(@"Error reading molecule %@\n",
