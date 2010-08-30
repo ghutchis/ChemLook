@@ -9,22 +9,20 @@
 %@
 </script>
 <script>
-<!-- molecule as SDF or PDB -->
+<!-- molecule as 2D SDF -->
 var molecule = '%@';
-var size = Math.min(window.innerWidth, window.innerHeight) - 100;
-var transformer = new TransformCanvas('transformer', size, size);
-  transformer.specs.bonds_clearOverlaps_2D = true;
-  transformer.specs.bonds_width_2D = 3;
-  transformer.specs.atoms_display = true;
-  transformer.specs.atoms_font_size_2D = 18;
-  transformer.specs.backgroundColor = 'white';
-  transformer.loadMolecule(%@(molecule));
+var viewer = new TransformCanvas('viewer', window.innerWidth - 100, window.innerHeight - 100);
+  viewer.specs.bonds_clearOverlaps_2D = true;
+  viewer.specs.bonds_width_2D = 3;
+  viewer.specs.atoms_display = true;
+  viewer.specs.atoms_font_size_2D = 18;
+  viewer.specs.backgroundColor = 'white';
+  viewer.loadMolecule(%@(molecule));
 </script>
 <style>
     body {
       background: #fff;
       text-align: center;
-      font-weight: bold;
       vertical-align: center;
       padding: 0px 0px 0px 0px;
       margin: 0px 0px 0px 0px;
@@ -32,6 +30,8 @@ var transformer = new TransformCanvas('transformer', size, size);
     }
  </style>
 </head>
+<!-- When the QuickLook window resizes, please redraw the -->
+<!-- figure. Allows simple "zooming -->
 <body onResize="window.location.href = window.location.href;">
 </body>
 </html>

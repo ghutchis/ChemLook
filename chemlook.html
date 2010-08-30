@@ -11,8 +11,7 @@
 <script>
 <!-- molecule as SDF or PDB -->
 var molecule = '%@';
-var size = Math.min(window.innerWidth, window.innerHeight) - 100;
-var transformer = new TransformCanvas('transformer', size, size, true);
+var transformer = new TransformCanvas('transformer', window.innerWidth - 100, window.innerHeight - 100, true);
   transformer.specs.bonds_clearOverlaps_2D = true;
   transformer.specs.bonds_useJMOLColors = true;
   transformer.specs.bonds_width_2D = 3;

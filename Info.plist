@@ -17,9 +17,11 @@
 				<string>net.sourceforge.openbabel.pdb</string>
 				<string>net.sourceforge.openbabel.cml</string>
 				<string>net.sourceforge.openbabel.mdl</string>
+  			<string>com.gaussian.cube</string>
+   			<string>com.gaussian.output</string>
+  			<string>com.gaussian.fchk</string>
 				<string>com.cambridgesoft.cdx</string>
-				<string>net.sourceforge.openbabel.cdxml</string>
-				<string>net.sourceforge.openbabel.smiles</string>
+				<string>com.cambridgesoft.cdxml</string>
 			</array>
 		</dict>
 	</array>
@@ -57,31 +59,124 @@
 	<string></string>
 	<key>QLNeedsToBeRunInMainThread</key>
 	<true/>
-	<key>QLPreviewHeight</key>
-	<integer>550</integer>
-	<key>QLPreviewWidth</key>
-	<integer>550</integer>
 	<key>QLSupportsConcurrentRequests</key>
 	<true/>
+	<key>QLPreviewHeight</key>
+	<integer>400</integer>
+	<key>QLPreviewWidth</key>
+	<integer>400</integer>
 	<key>QLThumbnailMinimumSize</key>
 	<real>32</real>
 	<key>QLDisableIconCorners</key>
 	<true/>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
+	<dict>
+		<key>UTTypeConformsTo</key>
+ 			<array>
+ 				<string>public.data</string>
+ 			</array>
+ 			<key>UTTypeDescription</key>
+ 			<string>Gaussian CUBE File</string>
+ 			<key>UTTypeIdentifier</key>
+ 			<string>com.gaussian.cube</string>
+ 			<key>UTTypeTagSpecification</key>
+ 			<dict>
+ 				<key>public.filename-extension</key>
+ 				<array>
+ 					<string>cub</string>
+    			<string>cube</string>
+ 				</array>
+ 			</dict>
+ 		</dict>
+ 		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.plain-text</string>
+				<string>public.text</string>
+ 			</array>
+ 			<key>UTTypeDescription</key>
+ 			<string>Gaussian03 Output</string>
+ 			<key>UTTypeIdentifier</key>
+ 			<string>com.gaussian.output</string>
+ 			<key>UTTypeTagSpecification</key>
+ 			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>g98</string>
+					<string>g03</string>
+					<string>g09</string>
+ 				</array>
+ 			</dict>
+ 		</dict>
+ 		<dict>
+			<key>UTTypeConformsTo</key>
+ 			<array>
+ 				<string>public.plain-text</string>
+ 				<string>public.text</string>
+ 			</array>
+ 			<key>UTTypeDescription</key>
+ 			<string>Gaussian FCHK file</string>
+ 			<key>UTTypeIdentifier</key>
+ 			<string>com.gaussian.fchk</string>
+ 			<key>UTTypeTagSpecification</key>
+ 			<dict>
+ 				<key>public.filename-extension</key>
+ 				<array>
+ 					<string>fchk</string>
+ 				</array>
+ 			</dict>
+ 		</dict>
+ 		<dict>
+			<key>UTTypeConformsTo</key>
+ 			<array>
+ 				<string>public.plain-text</string>
+ 				<string>public.text</string>
+ 			</array>
+ 			<key>UTTypeDescription</key>
+ 			<string>Gaussian03 Input</string>
+ 			<key>UTTypeIdentifier</key>
+ 			<string>com.gaussian.input</string>
+ 			<key>UTTypeTagSpecification</key>
+ 			<dict>
+ 				<key>public.filename-extension</key>
+ 				<array>
+ 					<string>gjf</string>
+      		<string>gzmat</string>
+ 				</array>
+ 			</dict>
+ 		</dict>
+ 		<dict>
+ 			<key>UTTypeConformsTo</key>
+ 			<array>
+ 				<string>public.plain-text</string>
+ 				<string>public.text</string>
+ 			</array>
+ 			<key>UTTypeDescription</key>
+ 			<string>GAMESS Output</string>
+ 			<key>UTTypeIdentifier</key>
+ 			<string>net.sourceforge.openbabel.gamout</string>
+ 			<key>UTTypeTagSpecification</key>
+ 			<dict>
+ 				<key>public.filename-extension</key>
+ 				<array>
+ 					<string>gamess</string>
+ 					<string>gamout</string>
+ 				</array>
+ 			</dict>
+ 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
+				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Ghemical Project</string>
+			<string>Ghemical project</string>
 			<key>UTTypeIdentifier</key>
 			<string>net.sourceforge.openbabel.gpr</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
-				<key>net.sourceforge.openbabel.ostype</key>
-				<string>GPRfile</string>
 				<key>public.filename-extension</key>
 				<array>
 					<string>gpr</string>
@@ -94,6 +189,7 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
+				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>Sybyl Mol2 document</string>
@@ -101,11 +197,10 @@
 			<string>net.sourceforge.openbabel.mol2</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
-				<key>net.sourceforge.openbabel.ostype</key>
-				<string>Mol2file</string>
 				<key>public.filename-extension</key>
 				<array>
 					<string>mol2</string>
+					<string>ml2</string>
 				</array>
 				<key>public.mime-type</key>
 				<string>chemical/x-mol2</string>
@@ -115,15 +210,14 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
+				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>XYZ Molecule document</string>
+			<string>XYZ molecule document</string>
 			<key>UTTypeIdentifier</key>
 			<string>net.sourceforge.openbabel.xyz</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
-				<key>net.sourceforge.openbabel.ostype</key>
-				<string>XYZfile</string>
 				<key>public.filename-extension</key>
 				<array>
 					<string>xyz</string>
@@ -136,6 +230,7 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
+				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>Protein Databank document</string>
@@ -143,8 +238,6 @@
 			<string>net.sourceforge.openbabel.pdb</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
-				<key>net.sourceforge.openbabel.ostype</key>
-				<string>XYZfile</string>
 				<key>public.filename-extension</key>
 				<array>
 					<string>pdb</string>
@@ -158,6 +251,7 @@
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
+				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>MDL Molfile document</string>
@@ -165,14 +259,19 @@
 			<string>net.sourceforge.openbabel.mdl</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
-				<key>net.sourceforge.openbabel.ostype</key>
-				<string>MDLfile</string>
 				<key>public.filename-extension</key>
 				<array>
 					<string>mdl</string>
 					<string>mol</string>
 					<string>sdf</string>
+					<string>sd</string>
 				</array>
+        <key>com.apple.ostype</key>
+        <array>
+          <string>mMOL</string>
+          <string>m300</string>
+          <string>MDL~</string>
+        </array>
 				<key>public.mime-type</key>
 				<string>chemical/x-molfile</string>
 			</dict>
@@ -189,8 +288,6 @@
 			<string>net.sourceforge.openbabel.cml</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
-				<key>net.sourceforge.openbabel.ostype</key>
-				<string>CMLfile</string>
 				<key>public.filename-extension</key>
 				<array>
 					<string>cml</string>
@@ -199,68 +296,44 @@
 				<string>chemical/x-cml</string>
 			</dict>
 		</dict>
+    <dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.xml</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>CS ChemDraw XML Drawing</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.cambridgesoft.cdxml</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<string>CdxM</string>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cdxml</string>
+				</array>
+			</dict>
+		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>ChemDraw document</string>
+			<string>CS ChemDraw Drawing</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.cambridgesoft.cdx</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
-				<key>net.sourceforge.openbabel.ostype</key>
-				<string>CDXfile</string>
+				<key>com.apple.ostype</key>
+				<string>CHMS</string>
 				<key>public.filename-extension</key>
 				<array>
 					<string>cdx</string>
 				</array>
 				<key>public.mime-type</key>
 				<string>chemical/x-cdx</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-				<string>public.xml</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>ChemDraw XML document</string>
-			<key>UTTypeIdentifier</key>
-			<string>net.sourceforge.openbabel.cdxml</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>net.sourceforge.openbabel.ostype</key>
-				<string>CDXMLfile</string>
-				<key>public.filename-extension</key>
-				<array>
-					<string>cdxml</string>
-				</array>
-				<key>public.mime-type</key>
-				<string>chemical/x-cdxml</string>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Daylight SMILES document</string>
-			<key>UTTypeIdentifier</key>
-			<string>net.sourceforge.openbabel.smiles</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>net.sourceforge.openbabel.ostype</key>
-				<string>SMILESfile</string>
-				<key>public.filename-extension</key>
-				<array>
-					<string>smiles</string>
-				</array>
-				<key>public.mime-type</key>
-				<string>chemical/x-daylight-smiles</string>
 			</dict>
 		</dict>
 	</array>

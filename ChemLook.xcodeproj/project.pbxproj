@@ -136,10 +136,10 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8399BEB7122BE00C00080C0C /* chemlook-2d.html */,
 				83154A671228127500ADA178 /* ChemDoodleWeb-libs.js */,
 				83154A681228127500ADA178 /* ChemDoodleWeb.js */,
 				83154A4D1227FAA700ADA178 /* chemlook.html */,
+				8399BEB7122BE00C00080C0C /* chemlook-2d.html */,
 				8D576317048677EA00EA77CD /* Info.plist */,
 				8D5B49A704867FD3000E48DA /* InfoPlist.strings */,
 			);
@@ -384,7 +384,7 @@
 					i386,
 					x86_64,
 				);
-				CURRENT_PROJECT_VERSION = 2.0.2;
+				CURRENT_PROJECT_VERSION = 1.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
