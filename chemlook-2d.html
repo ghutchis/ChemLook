@@ -9,15 +9,18 @@
 %@
 </script>
 <script>
+<!-- Don't use yellow on white for S atoms -->
+ELEMENT['S'].jmolColor = '#000000';
 <!-- molecule as 2D SDF -->
 var molecule = '%@';
 var viewer = new TransformCanvas('viewer', window.innerWidth - 100, window.innerHeight - 100);
-  viewer.specs.bonds_clearOverlaps_2D = true;
-  viewer.specs.bonds_width_2D = 3;
-  viewer.specs.atoms_display = true;
-  viewer.specs.atoms_font_size_2D = 18;
-  viewer.specs.backgroundColor = 'white';
-  viewer.loadMolecule(%@(molecule));
+ viewer.specs.bonds_clearOverlaps_2D = true;
+ viewer.specs.bonds_width_2D = 3;
+ viewer.specs.atoms_display = true;
+ viewer.specs.atoms_font_size_2D = 'bold 18';
+ viewer.specs.atoms_useJMOLColors = true;
+ viewer.specs.backgroundColor = 'white';
+ viewer.loadMolecule(%@(molecule));
 </script>
 <style>
     body {
