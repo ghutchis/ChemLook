@@ -12,18 +12,19 @@
 <!-- molecule as SDF or PDB -->
 var molecule = '%@';
 var size = Math.min(window.innerWidth, window.innerHeight) - 100;
-var transformer = new TransformCanvas('transformer', size, size, true);
+var transformer = new TransformCanvas('transformer', size, size);
   transformer.specs.bonds_clearOverlaps_2D = true;
-  transformer.specs.bonds_useJMOLColors = true;
   transformer.specs.bonds_width_2D = 3;
-  transformer.specs.atoms_display = false;
-  transformer.specs.backgroundColor = 'black';
+  transformer.specs.atoms_display = true;
+  transformer.specs.atoms_font_size_2D = 18;
+  transformer.specs.backgroundColor = 'white';
   transformer.loadMolecule(%@(molecule));
 </script>
 <style>
     body {
-      background: #000;
+      background: #fff;
       text-align: center;
+      font-weight: bold;
       vertical-align: center;
       padding: 0px 0px 0px 0px;
       margin: 0px 0px 0px 0px;

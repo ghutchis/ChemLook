@@ -32,6 +32,7 @@
 		83154A741228160900ADA178 /* ChemDoodleWeb.js in Resources */ = {isa = PBXBuildFile; fileRef = 83154A681228127500ADA178 /* ChemDoodleWeb.js */; };
 		8384E5481228B4DB002CD26B /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = 8384E5461228B4DB002CD26B /* Common.h */; };
 		8384E5491228B4DB002CD26B /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384E5471228B4DB002CD26B /* Common.m */; };
+		8399BEB8122BE00C00080C0C /* chemlook-2d.html in Resources */ = {isa = PBXBuildFile; fileRef = 8399BEB7122BE00C00080C0C /* chemlook-2d.html */; };
 		8D576312048677EA00EA77CD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB77B6FE84183AC02AAC07 /* main.c */; settings = {ATTRIBUTES = (); }; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
 		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
@@ -79,6 +80,7 @@
 		83154A681228127500ADA178 /* ChemDoodleWeb.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ChemDoodleWeb.js; sourceTree = "<group>"; };
 		8384E5461228B4DB002CD26B /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		8384E5471228B4DB002CD26B /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		8399BEB7122BE00C00080C0C /* chemlook-2d.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "chemlook-2d.html"; sourceTree = "<group>"; };
 		83C212541225A97E00E22A0B /* ChemLook.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChemLook.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C86B05260671AA6E00DD9006 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
@@ -134,6 +136,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8399BEB7122BE00C00080C0C /* chemlook-2d.html */,
 				83154A671228127500ADA178 /* ChemDoodleWeb-libs.js */,
 				83154A681228127500ADA178 /* ChemDoodleWeb.js */,
 				83154A4D1227FAA700ADA178 /* chemlook.html */,
@@ -228,6 +231,7 @@
 				83154A741228160900ADA178 /* ChemDoodleWeb.js in Resources */,
 				8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */,
 				83154A4E1227FAA700ADA178 /* chemlook.html in Resources */,
+				8399BEB8122BE00C00080C0C /* chemlook-2d.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

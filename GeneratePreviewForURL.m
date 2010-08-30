@@ -36,7 +36,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
 	// SDF / MOLfile can be read directly
 	// PDB can be read directly, but we use a different JavaScript function in the HTML
 	NSString *moleculeData = NULL;
-	
+	bool singleMol = true;
 	if (CFStringCompare(extension, CFSTR("sdf"), kCFCompareCaseInsensitive) == 0
 		|| CFStringCompare(extension, CFSTR("mdl"), kCFCompareCaseInsensitive) == 0
 		|| CFStringCompare(extension, CFSTR("mol"), kCFCompareCaseInsensitive) == 0
@@ -55,7 +55,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
 		// We need to pass this through babel to read
 		int status;
 		// If we have a CDX or CDXML, try to join all molecules into one SDF
-		bool singleMol = !(CFStringCompare(extension, CFSTR("cdx"), kCFCompareCaseInsensitive) == 0
+		singleMol = !(CFStringCompare(extension, CFSTR("cdx"), kCFCompareCaseInsensitive) == 0
 						   || CFStringCompare(extension, CFSTR("cdxml"), kCFCompareCaseInsensitive) == 0);
 		
 		moleculeData = babelURL(bundle, url, &status, singleMol);
@@ -68,7 +68,13 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
 	}
 
 	// Load the chemlook.html file template as a string for substitution
-	CFURLRef templateURL = CFBundleCopyResourceURL(bundle, CFSTR("chemlook.html"), NULL, NULL);
+	CFURLRef templateURL;
+	if (singleMol) {
+		templateURL = CFBundleCopyResourceURL(bundle, CFSTR("chemlook.html"), NULL, NULL);
+	} else {
+		templateURL = CFBundleCopyResourceURL(bundle, CFSTR("chemlook-2d.html"), NULL, NULL);
+	}
+
     NSString *templateString = [NSString stringWithContentsOfURL:(NSURL*)templateURL
 														encoding:NSUTF8StringEncoding
 														   error:&error];
