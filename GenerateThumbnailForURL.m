@@ -5,6 +5,7 @@
 #include <WebKit/WebKit.h>
 
 #define minSize 32
+#define windowSize 600.0
 
 /* -----------------------------------------------------------------------------
     Generate a thumbnail for file
@@ -20,6 +21,61 @@ GenerateThumbnailForURL(void *thisInterface,
                                  CFDictionaryRef options, 
                                  CGSize maxSize)
 {
+    // For some reason we seem to get called for small thumbnails even though
+    // we put a min size in our .plist file...
+    if (maxSize.width < minSize || maxSize.height < minSize)
+        return noErr;
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    // Render as though there is an 600x600 window, and fill the thumbnail 
+    // vertically.
+    
+    NSRect renderRect = NSMakeRect(0.0, 0.0, windowSize, windowSize);
+    float scale = maxSize.height/windowSize;
+    NSSize scaleSize = NSMakeSize(scale, scale);
+    CGSize thumbSize = NSSizeToCGSize(NSMakeSize(maxSize.width, maxSize.height));
+	
+    /* Based on example code from quicklook-dev mailing list */
+    // NSSize previewSize = NSSizeFromCGSize(maxSize);
+    int status;
+    CFBundleRef bundle = QLThumbnailRequestGetGeneratorBundle(thumbnail);
+	NSString *outputString = PreviewUrl(url, bundle);
+
+	CFDataRef data = CFStringCreateExternalRepresentation(NULL, (CFStringRef)outputString, kCFStringEncodingUTF8, 0);
+
+    //NSRect previewRect;
+    //previewRect.size = previewSize;
+	
+    WebView* webView = [[WebView alloc] initWithFrame:renderRect];
+    [webView scaleUnitSquareToSize:scaleSize];
+    [[[webView mainFrame] frameView] setAllowsScrolling:NO];
+    
+    [[webView mainFrame] loadData:(NSData*)data MIMEType:@"text/html"
+                 textEncodingName:@"UTF-8" baseURL:nil];
+    
+    while([webView isLoading]) {
+        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0, true);
+    }
+    
+    // Get a context to render into
+    CGContextRef context = 
+	QLThumbnailRequestCreateContext(thumbnail, thumbSize, false, NULL);
+    
+    if(context != NULL) {
+        NSGraphicsContext* nsContext = 
+		[NSGraphicsContext
+		 graphicsContextWithGraphicsPort:(void *)context 
+		 flipped:[webView isFlipped]];
+        
+        [webView displayRectIgnoringOpacity:[webView bounds]
+                                  inContext:nsContext];
+        
+        QLThumbnailRequestFlushContext(thumbnail, context);
+        
+        CFRelease(context);
+    }
+
+    [pool release];
     return noErr;
 }
 
