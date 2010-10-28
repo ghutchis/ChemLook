@@ -17,6 +17,8 @@
 				<string>net.sourceforge.openbabel.pdb</string>
 				<string>net.sourceforge.openbabel.cml</string>
 				<string>net.sourceforge.openbabel.mdl</string>
+        <string>net.sourceforge.openbabel.gamout</string>
+        <string>net.sourceforge.openbabel.qcout</string>
   			<string>com.gaussian.cube</string>
    			<string>com.gaussian.output</string>
   			<string>com.gaussian.fchk</string>
@@ -162,6 +164,24 @@
  				<array>
  					<string>gamess</string>
  					<string>gamout</string>
+ 				</array>
+ 			</dict>
+ 		</dict>
+ 		<dict>
+ 			<key>UTTypeConformsTo</key>
+ 			<array>
+ 				<string>public.plain-text</string>
+ 				<string>public.text</string>
+ 			</array>
+ 			<key>UTTypeDescription</key>
+ 			<string>Q-Chem Output</string>
+ 			<key>UTTypeIdentifier</key>
+ 			<string>net.sourceforge.openbabel.qcout</string>
+ 			<key>UTTypeTagSpecification</key>
+ 			<dict>
+ 				<key>public.filename-extension</key>
+ 				<array>
+ 					<string>qcout</string>
  				</array>
  			</dict>
  		</dict>
