@@ -78,7 +78,7 @@ NSString *babelURL(CFBundleRef bundle, CFURLRef url, int *status, bool singleMol
     return output;
 }
 
-NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url)
+NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error)
 {
 	// Save the extension for future comparisons
 	CFStringRef extension = CFURLCopyPathExtension(url);
@@ -100,7 +100,7 @@ NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url)
 			// an error occurred
 			NSLog(@"Error reading molecule %@\n",
 				  [error localizedFailureReason]);
-			goto done;
+			return nil;
 		}		
 	} else {
 		// We need to pass this through babel to read

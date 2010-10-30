@@ -15,4 +15,4 @@
 
 // Status is 0 on success, nonzero on error (like a shell command)
 NSString *babelURL(CFBundleRef myBundle, CFURLRef url, int *status, bool singleMol);
-NSString *PreviewUrl(CFBundleRef myBundle, CFURLRef url);
+NSString *PreviewUrl(CFBundleRef myBundle, CFURLRef url, NSError *error);

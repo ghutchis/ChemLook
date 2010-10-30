@@ -29,7 +29,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
 	// We need the path of the bundle to get the HTML template and JavaScript
     CFBundleRef bundle = QLPreviewRequestGetGeneratorBundle(preview);
 
-	NSString *outputString = PreviewUrl(url, bundle);
+	NSString *outputString = PreviewUrl(bundle, url, error);
     
 	// Set the properties of the QuickLook view
     // UTF-8 -- not that there's text
