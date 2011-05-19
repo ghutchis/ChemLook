@@ -78,7 +78,7 @@ NSString *babelURL(CFBundleRef bundle, CFURLRef url, int *status, bool singleMol
     return output;
 }
 
-NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error)
+NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error, bool thumbnail)
 {
 	// Save the extension for future comparisons
 	CFStringRef extension = CFURLCopyPathExtension(url);
@@ -120,10 +120,14 @@ NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error)
 	
 	// Load the chemlook.html file template as a string for substitution
 	CFURLRef templateURL;
-	if (singleMol) {
-		templateURL = CFBundleCopyResourceURL(bundle, CFSTR("chemlook.html"), NULL, NULL);
+	if (!thumbnail) {
+		if (singleMol) {
+			templateURL = CFBundleCopyResourceURL(bundle, CFSTR("chemlook.html"), NULL, NULL);
+		} else {
+			templateURL = CFBundleCopyResourceURL(bundle, CFSTR("chemlook-2d.html"), NULL, NULL);
+		}
 	} else {
-		templateURL = CFBundleCopyResourceURL(bundle, CFSTR("chemlook-2d.html"), NULL, NULL);
+		templateURL = CFBundleCopyResourceURL(bundle, CFSTR("chemlook-thumb.html"), NULL, NULL);
 	}
 	
     NSString *templateString = [NSString stringWithContentsOfURL:(NSURL*)templateURL

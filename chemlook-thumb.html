@@ -11,12 +11,12 @@
 <script>
 <!-- molecule as SDF or PDB -->
 var molecule = '%@';
-var width = window.innerWidth * 0.95;
-var height = window.innerHeight * 0.95;
-var transformer = new TransformCanvas('transformer', width, height, true);
+var width = window.innerWidth * 0.90;
+var height = window.innerHeight * 0.90;
+var transformer = new TransformCanvas('transformer', width, height);
   transformer.specs.bonds_clearOverlaps_2D = true;
   transformer.specs.bonds_useJMOLColors = true;
-  transformer.specs.bonds_width_2D = 3;
+  transformer.specs.bonds_width_2D = 6;
   transformer.specs.atoms_display = false;
   transformer.specs.backgroundColor = 'black';
   transformer.loadMolecule(%@(molecule));
