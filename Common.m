@@ -91,6 +91,7 @@ NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error, bool thum
 	if (CFStringCompare(extension, CFSTR("sdf"), kCFCompareCaseInsensitive) == 0
 		|| CFStringCompare(extension, CFSTR("mdl"), kCFCompareCaseInsensitive) == 0
 		|| CFStringCompare(extension, CFSTR("mol"), kCFCompareCaseInsensitive) == 0
+        || CFStringCompare(extension, CFSTR("cif"), kCFCompareCaseInsensitive) == 0
 		|| CFStringCompare(extension, CFSTR("pdb"), kCFCompareCaseInsensitive) == 0) {
 		// use this file directly, we can read it using JavaScript
 		moleculeData = [NSString stringWithContentsOfURL:(NSURL*)url
@@ -98,6 +99,7 @@ NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error, bool thum
 												   error:&error];
 		if (moleculeData == nil) {
 			// an error occurred
+            CFRelease(extension);
 			NSLog(@"Error reading molecule %@\n",
 				  [error localizedFailureReason]);
 			return nil;
@@ -112,12 +114,13 @@ NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error, bool thum
 		moleculeData = babelURL(bundle, url, &status, singleMol);
 		if (status != 0 || moleculeData == nil) {
 			// an error occurred
+            CFRelease(extension);
 			NSLog(@"Error reading molecule %@\n",
 				  [error localizedFailureReason]);
 			return nil;
 		}		
 	}
-	
+    	
 	// Load the chemlook.html file template as a string for substitution
 	CFURLRef templateURL;
 	if (!thumbnail) {
@@ -163,14 +166,18 @@ NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error, bool thum
 	}
 	CFRelease(mainURL);
 	
-	NSString *cleanedMol = [moleculeData stringByReplacingOccurrencesOfString:@"\r"
-																   withString:@""];
-	NSString *escapedMol = [cleanedMol stringByReplacingOccurrencesOfString:@"\n"
-																 withString:@"\\n"];
+	NSString *escapedMol = [[[moleculeData stringByReplacingOccurrencesOfString:@"\n"
+																 withString:@"\\n"]
+                            stringByReplacingOccurrencesOfString:@"'"
+                            withString:@"\\'"]
+                            stringByReplacingOccurrencesOfString:@"\r"
+                            withString:@""];
 	
-	NSString *readFunction = @"readMOL";
+	NSString *readFunction = @"ChemDoodle.readMOL";
 	if (CFStringCompare(extension, CFSTR("pdb"), kCFCompareCaseInsensitive) == 0)
-		readFunction = @"readPDB";		
+		readFunction = @"ChemDoodle.readPDB";
+    else if (CFStringCompare(extension, CFSTR("cif"), kCFCompareCaseInsensitive) == 0)
+        readFunction = @"ChemDoodle.readCIF";
 	// OK, the template has several strings, so let's format them
 	NSString *outputString = [NSString stringWithFormat:templateString,
 								  libsData,
@@ -179,5 +186,6 @@ NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error, bool thum
 								  readFunction,
 								  nil];
 		
-		return outputString;
+    CFRelease(extension);
+    return outputString;
 }

@@ -17,13 +17,14 @@
 				<string>net.sourceforge.openbabel.pdb</string>
 				<string>net.sourceforge.openbabel.cml</string>
 				<string>net.sourceforge.openbabel.mdl</string>
-        <string>net.sourceforge.openbabel.gamout</string>
-        <string>net.sourceforge.openbabel.qcout</string>
-  			<string>com.gaussian.cube</string>
-   			<string>com.gaussian.output</string>
-  			<string>com.gaussian.fchk</string>
+				<string>net.sourceforge.openbabel.gamout</string>
+				<string>net.sourceforge.openbabel.qcout</string>
+				<string>com.gaussian.cube</string>
+				<string>com.gaussian.output</string>
+				<string>com.gaussian.fchk</string>
 				<string>com.cambridgesoft.cdx</string>
 				<string>com.cambridgesoft.cdxml</string>
+        <string>org.iucr.cif</string>
 			</array>
 		</dict>
 	</array>
@@ -64,127 +65,127 @@
 	<key>QLSupportsConcurrentRequests</key>
 	<true/>
 	<key>QLPreviewHeight</key>
-	<integer>400</integer>
+	<integer>450</integer>
 	<key>QLPreviewWidth</key>
-	<integer>400</integer>
+	<integer>450</integer>
 	<key>QLThumbnailMinimumSize</key>
-	<real>32</real>
+	<integer>64</integer>
 	<key>QLDisableIconCorners</key>
 	<true/>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
-	<dict>
-		<key>UTTypeConformsTo</key>
- 			<array>
- 				<string>public.data</string>
- 			</array>
- 			<key>UTTypeDescription</key>
- 			<string>Gaussian CUBE File</string>
- 			<key>UTTypeIdentifier</key>
- 			<string>com.gaussian.cube</string>
- 			<key>UTTypeTagSpecification</key>
- 			<dict>
- 				<key>public.filename-extension</key>
- 				<array>
- 					<string>cub</string>
-    			<string>cube</string>
- 				</array>
- 			</dict>
- 		</dict>
- 		<dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Gaussian CUBE File</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.gaussian.cube</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cub</string>
+					<string>cube</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.plain-text</string>
 				<string>public.text</string>
- 			</array>
- 			<key>UTTypeDescription</key>
- 			<string>Gaussian03 Output</string>
- 			<key>UTTypeIdentifier</key>
- 			<string>com.gaussian.output</string>
- 			<key>UTTypeTagSpecification</key>
- 			<dict>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Gaussian03 Output</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.gaussian.output</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
 				<key>public.filename-extension</key>
 				<array>
 					<string>g98</string>
 					<string>g03</string>
 					<string>g09</string>
- 				</array>
- 			</dict>
- 		</dict>
- 		<dict>
+				</array>
+			</dict>
+		</dict>
+		<dict>
 			<key>UTTypeConformsTo</key>
- 			<array>
- 				<string>public.plain-text</string>
- 				<string>public.text</string>
- 			</array>
- 			<key>UTTypeDescription</key>
- 			<string>Gaussian FCHK file</string>
- 			<key>UTTypeIdentifier</key>
- 			<string>com.gaussian.fchk</string>
- 			<key>UTTypeTagSpecification</key>
- 			<dict>
- 				<key>public.filename-extension</key>
- 				<array>
- 					<string>fchk</string>
- 				</array>
- 			</dict>
- 		</dict>
- 		<dict>
+			<array>
+				<string>public.plain-text</string>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Gaussian FCHK file</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.gaussian.fchk</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>fchk</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
 			<key>UTTypeConformsTo</key>
- 			<array>
- 				<string>public.plain-text</string>
- 				<string>public.text</string>
- 			</array>
- 			<key>UTTypeDescription</key>
- 			<string>Gaussian03 Input</string>
- 			<key>UTTypeIdentifier</key>
- 			<string>com.gaussian.input</string>
- 			<key>UTTypeTagSpecification</key>
- 			<dict>
- 				<key>public.filename-extension</key>
- 				<array>
- 					<string>gjf</string>
-      		<string>gzmat</string>
- 				</array>
- 			</dict>
- 		</dict>
- 		<dict>
- 			<key>UTTypeConformsTo</key>
- 			<array>
- 				<string>public.plain-text</string>
- 				<string>public.text</string>
- 			</array>
- 			<key>UTTypeDescription</key>
- 			<string>GAMESS Output</string>
- 			<key>UTTypeIdentifier</key>
- 			<string>net.sourceforge.openbabel.gamout</string>
- 			<key>UTTypeTagSpecification</key>
- 			<dict>
- 				<key>public.filename-extension</key>
- 				<array>
- 					<string>gamess</string>
- 					<string>gamout</string>
- 				</array>
- 			</dict>
- 		</dict>
- 		<dict>
- 			<key>UTTypeConformsTo</key>
- 			<array>
- 				<string>public.plain-text</string>
- 				<string>public.text</string>
- 			</array>
- 			<key>UTTypeDescription</key>
- 			<string>Q-Chem Output</string>
- 			<key>UTTypeIdentifier</key>
- 			<string>net.sourceforge.openbabel.qcout</string>
- 			<key>UTTypeTagSpecification</key>
- 			<dict>
- 				<key>public.filename-extension</key>
- 				<array>
- 					<string>qcout</string>
- 				</array>
- 			</dict>
- 		</dict>
+			<array>
+				<string>public.plain-text</string>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Gaussian03 Input</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.gaussian.input</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>gjf</string>
+					<string>gzmat</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.plain-text</string>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>GAMESS Output</string>
+			<key>UTTypeIdentifier</key>
+			<string>net.sourceforge.openbabel.gamout</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>gamess</string>
+					<string>gamout</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.plain-text</string>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Q-Chem Output</string>
+			<key>UTTypeIdentifier</key>
+			<string>net.sourceforge.openbabel.qcout</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>qcout</string>
+				</array>
+			</dict>
+		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
@@ -286,12 +287,12 @@
 					<string>sdf</string>
 					<string>sd</string>
 				</array>
-        <key>com.apple.ostype</key>
-        <array>
-          <string>mMOL</string>
-          <string>m300</string>
-          <string>MDL~</string>
-        </array>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>mMOL</string>
+					<string>m300</string>
+					<string>MDL~</string>
+				</array>
 				<key>public.mime-type</key>
 				<string>chemical/x-molfile</string>
 			</dict>
@@ -316,7 +317,7 @@
 				<string>chemical/x-cml</string>
 			</dict>
 		</dict>
-    <dict>
+		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.xml</string>
@@ -354,6 +355,25 @@
 				</array>
 				<key>public.mime-type</key>
 				<string>chemical/x-cdx</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Crystallographic Information File</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.iucr.cif</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cif</string>
+				</array>
+				<key>public.mime-type</key>
+				<string>chemical/x-cif</string>
 			</dict>
 		</dict>
 	</array>

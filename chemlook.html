@@ -13,13 +13,13 @@
 var molecule = '%@';
 var width = window.innerWidth * 0.95;
 var height = window.innerHeight * 0.95;
-var transformer = new TransformCanvas('transformer', width, height, true);
+var transformer = new ChemDoodle.TransformCanvas('transformer', width, height, true);
   transformer.specs.bonds_clearOverlaps_2D = true;
   transformer.specs.bonds_useJMOLColors = true;
   transformer.specs.bonds_width_2D = 3;
   transformer.specs.atoms_display = false;
   transformer.specs.backgroundColor = 'black';
-  transformer.loadMolecule(%@(molecule));
+transformer.loadMolecule(%@(molecule));
 </script>
 <style>
     body {

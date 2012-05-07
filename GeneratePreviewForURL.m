@@ -24,7 +24,7 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
         return noErr;
     
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSError *error;
+    NSError *error = 0;
     	
 	// We need the path of the bundle to get the HTML template and JavaScript
     CFBundleRef bundle = QLPreviewRequestGetGeneratorBundle(preview);
@@ -48,6 +48,9 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
 
 	// Free up and clean
 done:
+    [properties release];
+    CFRelease(output);
+    
     [pool release];
     return noErr;
 }

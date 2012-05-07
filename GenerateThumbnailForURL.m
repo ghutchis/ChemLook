@@ -6,7 +6,7 @@
 
 #import "Common.h"
 
-#define minSize 32
+#define minSize 64
 #define windowSize 512.0
 
 /* -----------------------------------------------------------------------------
@@ -35,21 +35,15 @@ GenerateThumbnailForURL(void *thisInterface,
 	
 	// Render as though there is an 512x512 window, and fill the thumbnail 
 	// vertically.
-	
 	NSRect renderRect = NSMakeRect(0.0, 0.0, windowSize, windowSize);
 	float scale = maxSize.height/windowSize;
 	NSSize scaleSize = NSMakeSize(scale, scale);
 	CGSize thumbSize = NSSizeToCGSize(NSMakeSize(maxSize.width, maxSize.height));
 	
-	// Based on example code from quicklook-dev mailing list
-	// NSSize previewSize = NSSizeFromCGSize(maxSize);
 	CFBundleRef bundle = QLThumbnailRequestGetGeneratorBundle(thumbnail);
 	NSString *outputString = PreviewUrl(bundle, url, error, true);
 	
 	CFDataRef data = CFStringCreateExternalRepresentation(NULL, (CFStringRef)outputString, kCFStringEncodingUTF8, 0);
-	
-	//NSRect previewRect;
-	//previewRect.size = previewSize;
 	
 	WebView* webView = [[WebView alloc] initWithFrame:renderRect];
 	[webView scaleUnitSquareToSize:scaleSize];
