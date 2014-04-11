@@ -56,7 +56,7 @@ NSString *babelURL(CFBundleRef bundle, NSURL *url, int *status, bool singleMol) 
     NSMutableDictionary *env = [NSMutableDictionary dictionaryWithDictionary:[[NSProcessInfo processInfo] environment]];
 	[env addEntriesFromDictionary:[defaults persistentDomainForName:myDomain]];
     
-    NSString *cmd = [NSString stringWithFormat:@"'/usr/local/bin/babel' %@ '%@' -omol", options, targetEsc];
+    NSString *cmd = [NSString stringWithFormat:@"'/usr/local/bin/obabel' '%@' %@ -omol", targetEsc, options];
     output = runTask(cmd, env, status);
     if (*status != 0) {
         NSLog(@"ChemLook: babel failed with exit code %d.  Command was (%@).", *status, cmd);
@@ -65,8 +65,7 @@ NSString *babelURL(CFBundleRef bundle, NSURL *url, int *status, bool singleMol) 
 }
 
 NSString *PreviewUrl(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbnail) {
-	// Save the extension for future comparisons
-	//CFStringRef extension = CFURLCopyPathExtension(url);
+    // Get the file extension
     NSString *extension = [[[url path] pathExtension] lowercaseString];
 	
 	// Now we load the molecule, but it depends on the extension
