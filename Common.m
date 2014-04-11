@@ -68,8 +68,7 @@ NSString *babelURL(CFBundleRef bundle, CFURLRef url, int *status, bool singleMol
     
     output = runTask(cmd, env, status);
     if (*status != 0) {
-        NSLog(@"ChemLook: babel failed with exit code %d.  Command was (%@).", 
-              *status, cmd);
+        NSLog(@"ChemLook: babel failed with exit code %d.  Command was (%@).", *status, cmd);
     }
     return output;
 }

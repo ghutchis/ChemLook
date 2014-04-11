@@ -15,8 +15,7 @@
    This function's job is to create thumbnail for designated file as fast as possible
    ----------------------------------------------------------------------------- */
 
-OSStatus 
-GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options, CGSize maxSize) {
+OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options, CGSize maxSize) {
     @autoreleasepool {
         return noErr;
         // The code doesn't seem to work, we always get black thumbnails
