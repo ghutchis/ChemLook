@@ -59,6 +59,7 @@
 			dstPath = "${HOME}/Library/QuickLook/";
 			dstSubfolderSpec = 0;
 			files = (
+				C944ADE918F85749009A4B07 /* ChemLook.qlgenerator in Copy to Library */,
 			);
 			name = "Copy to Library";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,7 +346,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/QuickLook;
-				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_CFLAGS = "-DDEBUG";
 				PRODUCT_NAME = ChemLook;
 				VALID_ARCHS = "i386 x86_64";
@@ -368,7 +368,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = /Library/QuickLook;
-				MACOSX_DEPLOYMENT_TARGET = "";
 				PRODUCT_NAME = ChemLook;
 				WARNING_CFLAGS = (
 					"-Wextra",
