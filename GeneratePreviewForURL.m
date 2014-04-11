@@ -20,11 +20,11 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     @autoreleasepool {
         if (QLPreviewRequestIsCancelled(preview))
             return noErr;
-
+        
         // We need the path of the bundle to get the HTML template and JavaScript
         CFBundleRef bundle = QLPreviewRequestGetGeneratorBundle(preview);
         NSError *error = 0;
-        NSString *outputString = PreviewUrl(bundle, url, error, false);
+        NSString *outputString = PreviewUrl(bundle, (__bridge NSURL *)url, error, false);
         
         // Set the properties of the QuickLook view
         CFDictionaryRef properties = (__bridge CFDictionaryRef)@{

@@ -46,26 +46,17 @@ NSString *runTask(NSString *script, NSDictionary *env, int *exitCode) {
     return output;
 }
 
-NSString *pathOfURL(CFURLRef url) {
-    NSString *targetCFS = [[(__bridge NSURL *)url absoluteURL] path];
-    return targetCFS;
-}
-
-NSString *babelURL(CFBundleRef bundle, CFURLRef url, int *status, bool singleMol) {
+NSString *babelURL(CFBundleRef bundle, NSURL *url, int *status, bool singleMol) {
     NSString *output = NULL;
-    NSString *targetEsc = pathOfURL(url);
+    NSString *targetEsc = [[url absoluteURL] path];
+    NSString *options = singleMol ? @"-l 1" : @"--join";
     
     // Set up preferences
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *env = [NSMutableDictionary dictionaryWithDictionary:
-                                [[NSProcessInfo processInfo] environment]];
+    NSMutableDictionary *env = [NSMutableDictionary dictionaryWithDictionary:[[NSProcessInfo processInfo] environment]];
 	[env addEntriesFromDictionary:[defaults persistentDomainForName:myDomain]];
     
-    NSString *cmd = [NSString stringWithFormat:
-                     @"'/usr/local/bin/babel' %@ '%@' -omol",
-					 singleMol ? @"-l 1" : @"--join",
-                     targetEsc];
-    
+    NSString *cmd = [NSString stringWithFormat:@"'/usr/local/bin/babel' %@ '%@' -omol", options, targetEsc];
     output = runTask(cmd, env, status);
     if (*status != 0) {
         NSLog(@"ChemLook: babel failed with exit code %d.  Command was (%@).", *status, cmd);
@@ -84,7 +75,6 @@ NSString *PreviewUrl(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbn
 	NSString *moleculeData = NULL;
 	bool singleMol = true;
     
-    // TODO: Pass SDF through Open Babel because ChemDoodle only reads first molecule
     NSArray* formats = @[@"sdf", @"mdl", @"mol", @"cif", @"pdb"];
 	if ([formats containsObject:extension]) {
 		// use this file directly, we can read it using JavaScript
@@ -122,22 +112,9 @@ NSString *PreviewUrl(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbn
 														   error:&error];
     if (templateString == nil) {
 		// an error occurred
-		NSLog(@"Error reading template %@\n",
-			  [error localizedFailureReason]);
+		NSLog(@"Error reading template %@", [error localizedFailureReason]);
     }
 	CFRelease(templateURL);
-	
-	// Now load the JavaScript files
-	CFURLRef libsURL = CFBundleCopyResourceURL(bundle, CFSTR("ChemDoodleWeb-libs.js"), NULL, NULL);
-	NSString *libsData = [NSString stringWithContentsOfURL:(__bridge NSURL*)libsURL
-												  encoding:NSUTF8StringEncoding
-													 error:&error];
-	if (libsData == nil){
-		// an error occurred
-		NSLog(@"Error reading libs %@\n",
-			  [error localizedFailureReason]);		
-	}
-	CFRelease(libsURL);
 	
 	CFURLRef mainURL = CFBundleCopyResourceURL(bundle, CFSTR("ChemDoodleWeb.js"), NULL, NULL);
 	NSString *mainData = [NSString stringWithContentsOfURL:(__bridge NSURL*)mainURL
@@ -145,8 +122,7 @@ NSString *PreviewUrl(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbn
 													 error:&error];
 	if (mainData == nil){
 		// an error occurred
-		NSLog(@"Error reading main %@\n",
-			  [error localizedFailureReason]);		
+		NSLog(@"Error reading main %@", [error localizedFailureReason]);
 	}
 	CFRelease(mainURL);
 	
@@ -158,18 +134,12 @@ NSString *PreviewUrl(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbn
                             withString:@""];
 	
 	NSString *readFunction = @"ChemDoodle.readMOL";
-	if (CFStringCompare(extension, CFSTR("pdb"), kCFCompareCaseInsensitive) == 0)
-		readFunction = @"ChemDoodle.readPDB";
-    else if (CFStringCompare(extension, CFSTR("cif"), kCFCompareCaseInsensitive) == 0)
+    if ([extension isEqualToString:@"pdb"]) {
+        readFunction = @"ChemDoodle.readPDB";
+    } else if ([extension isEqualToString:@"cif"]) {
         readFunction = @"ChemDoodle.readCIF";
+    }
 	// OK, the template has several strings, so let's format them
-	NSString *outputString = [NSString stringWithFormat:templateString,
-								  libsData,
-								  mainData,
-								  escapedMol,
-								  readFunction,
-								  nil];
-		
-    CFRelease(extension);
+	NSString *outputString = [NSString stringWithFormat:templateString, mainData, escapedMol, readFunction, nil];
     return outputString;
 }

@@ -32,7 +32,7 @@ OSStatus GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thum
         
         CFBundleRef bundle = QLThumbnailRequestGetGeneratorBundle(thumbnail);
         NSError *error;
-        NSString *outputString = PreviewUrl(bundle, url, error, true);
+        NSString *outputString = PreviewUrl(bundle, (__bridge NSURL *)url , error, true);
         CFDataRef data = CFStringCreateExternalRepresentation(NULL, (CFStringRef)outputString, kCFStringEncodingUTF8, 0);
         
         WebView* webView = [[WebView alloc] initWithFrame:renderRect];

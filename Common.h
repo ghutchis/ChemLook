@@ -14,5 +14,5 @@
 #define myDomain @"net.openmolecules.ChemLook"
 
 // Status is 0 on success, nonzero on error (like a shell command)
-NSString *babelURL(CFBundleRef myBundle, CFURLRef url, int *status, bool singleMol);
-NSString *PreviewUrl(CFBundleRef myBundle, CFURLRef url, NSError *error, bool thumbnail);
+NSString *babelURL(CFBundleRef myBundle, NSURL *url, int *status, bool singleMol);
+NSString *PreviewUrl(CFBundleRef myBundle, NSURL *url, NSError *error, bool thumbnail);
