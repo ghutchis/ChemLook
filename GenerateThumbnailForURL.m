@@ -16,71 +16,54 @@
    ----------------------------------------------------------------------------- */
 
 OSStatus 
-GenerateThumbnailForURL(void *thisInterface, 
-                                 QLThumbnailRequestRef thumbnail, 
-                                 CFURLRef url, 
-                                 CFStringRef contentTypeUTI, 
-                                 CFDictionaryRef options, 
-                                 CGSize maxSize)
-{
-	return noErr;
-  // The code doesn't seem to work, we always get black thumbnails
-
-	// For some reason we seem to get called for small thumbnails even though
-	// we put a min size in our .plist file...
-	if (maxSize.width < minSize || maxSize.height < minSize)
-		return noErr;
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	NSError *error;
-	
-	// Render as though there is an 512x512 window, and fill the thumbnail 
-	// vertically.
-	NSRect renderRect = NSMakeRect(0.0, 0.0, windowSize, windowSize);
-	float scale = maxSize.height/windowSize;
-	NSSize scaleSize = NSMakeSize(scale, scale);
-	CGSize thumbSize = NSSizeToCGSize(NSMakeSize(maxSize.width, maxSize.height));
-	
-	CFBundleRef bundle = QLThumbnailRequestGetGeneratorBundle(thumbnail);
-	NSString *outputString = PreviewUrl(bundle, url, error, true);
-	
-	CFDataRef data = CFStringCreateExternalRepresentation(NULL, (CFStringRef)outputString, kCFStringEncodingUTF8, 0);
-	
-	WebView* webView = [[WebView alloc] initWithFrame:renderRect];
-	[webView scaleUnitSquareToSize:scaleSize];
-	[[[webView mainFrame] frameView] setAllowsScrolling:NO];
-	
-	[[webView mainFrame] loadData:(NSData*)data MIMEType:@"text/html"
-				 textEncodingName:@"UTF-8" baseURL:nil];
-	
-	while([webView isLoading]) {
-		CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0, true);
-	}
-	
-	// Get a context to render into
-	CGContextRef context = 
-	QLThumbnailRequestCreateContext(thumbnail, thumbSize, false, NULL);
-	
-	if(context != NULL) {
-		NSGraphicsContext* nsContext = 
-		[NSGraphicsContext
-		 graphicsContextWithGraphicsPort:(void *)context 
-		 flipped:[webView isFlipped]];
-		
-		[webView displayRectIgnoringOpacity:[webView bounds]
-								  inContext:nsContext];
-		
-		QLThumbnailRequestFlushContext(thumbnail, context);
-		
-		CFRelease(context);
-	}
-	
-	[pool release];
-	return noErr;
+GenerateThumbnailForURL(void *thisInterface, QLThumbnailRequestRef thumbnail, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options, CGSize maxSize) {
+    @autoreleasepool {
+        return noErr;
+        // The code doesn't seem to work, we always get black thumbnails
+        
+        // For some reason we seem to get called for small thumbnails even though we put a min size in our .plist file...
+        if (maxSize.width < minSize || maxSize.height < minSize)
+            return noErr;
+        
+        // Render as though there is an 512x512 window, and fill the thumbnail vertically.
+        NSRect renderRect = NSMakeRect(0.0, 0.0, windowSize, windowSize);
+        float scale = maxSize.height/windowSize;
+        NSSize scaleSize = NSMakeSize(scale, scale);
+        CGSize thumbSize = NSSizeToCGSize(NSMakeSize(maxSize.width, maxSize.height));
+        
+        CFBundleRef bundle = QLThumbnailRequestGetGeneratorBundle(thumbnail);
+        NSError *error;
+        NSString *outputString = PreviewUrl(bundle, url, error, true);
+        CFDataRef data = CFStringCreateExternalRepresentation(NULL, (CFStringRef)outputString, kCFStringEncodingUTF8, 0);
+        
+        WebView* webView = [[WebView alloc] initWithFrame:renderRect];
+        [webView scaleUnitSquareToSize:scaleSize];
+        [[[webView mainFrame] frameView] setAllowsScrolling:NO];
+        [[webView mainFrame] loadData:(__bridge NSData*)data MIMEType:@"text/html" textEncodingName:@"UTF-8" baseURL:nil];
+        
+        while([webView isLoading]) {
+            CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0, true);
+        }
+        
+        // Get a context to render into
+        CGContextRef context = QLThumbnailRequestCreateContext(thumbnail, thumbSize, false, NULL);
+        if(context != NULL) {
+            NSGraphicsContext* nsContext =
+            [NSGraphicsContext
+             graphicsContextWithGraphicsPort:(void *)context 
+             flipped:[webView isFlipped]];
+            
+            [webView displayRectIgnoringOpacity:[webView bounds]
+                                      inContext:nsContext];
+            
+            QLThumbnailRequestFlushContext(thumbnail, context);
+            CFRelease(context);
+        }
+        return noErr;
+    }
 }
 
-void CancelThumbnailGeneration(void* thisInterface, 
-                               QLThumbnailRequestRef thumbnail)
-{
+void CancelThumbnailGeneration(void* thisInterface, QLThumbnailRequestRef thumbnail) {
     // implement only if supported
 }
  

@@ -1,5 +1,5 @@
 /*
- *  Common.c
+ *  Common.m
  *  Part of ChemLook
  *   by Geoffrey Hutchison
  * 
@@ -12,7 +12,6 @@
 #import <CoreFoundation/CoreFoundation.h>
 #import <CoreServices/CoreServices.h>
 #import <Foundation/Foundation.h>
-#import <limits.h>  // PATH_MAX
 
 #include "Common.h"
 
@@ -39,23 +38,20 @@ NSString *runTask(NSString *script, NSDictionary *env, int *exitCode) {
     [task waitUntilExit];
     
     *exitCode = [task terminationStatus];
-    [task release];
+    
     /* The docs claim this isn't needed, but we leak descriptors otherwise */
     [file closeFile];
-    /*[pipe release];*/
     
 	NSString* output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     return output;
 }
 
-NSString *pathOfURL(CFURLRef url)
-{
-    NSString *targetCFS = [[(NSURL *)url absoluteURL] path];
+NSString *pathOfURL(CFURLRef url) {
+    NSString *targetCFS = [[(__bridge NSURL *)url absoluteURL] path];
     return targetCFS;
 }
 
-NSString *babelURL(CFBundleRef bundle, CFURLRef url, int *status, bool singleMol)
-{
+NSString *babelURL(CFBundleRef bundle, CFURLRef url, int *status, bool singleMol) {
     NSString *output = NULL;
     NSString *targetEsc = pathOfURL(url);
     
@@ -78,8 +74,7 @@ NSString *babelURL(CFBundleRef bundle, CFURLRef url, int *status, bool singleMol
     return output;
 }
 
-NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error, bool thumbnail)
-{
+NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error, bool thumbnail) {
 	// Save the extension for future comparisons
 	CFStringRef extension = CFURLCopyPathExtension(url);
 	
@@ -94,7 +89,7 @@ NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error, bool thum
         || CFStringCompare(extension, CFSTR("cif"), kCFCompareCaseInsensitive) == 0
 		|| CFStringCompare(extension, CFSTR("pdb"), kCFCompareCaseInsensitive) == 0) {
 		// use this file directly, we can read it using JavaScript
-		moleculeData = [NSString stringWithContentsOfURL:(NSURL*)url
+		moleculeData = [NSString stringWithContentsOfURL:(__bridge NSURL*)url
 												encoding:NSUTF8StringEncoding
 												   error:&error];
 		if (moleculeData == nil) {
@@ -133,7 +128,7 @@ NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error, bool thum
 		templateURL = CFBundleCopyResourceURL(bundle, CFSTR("chemlook-thumb.html"), NULL, NULL);
 	}
 	
-    NSString *templateString = [NSString stringWithContentsOfURL:(NSURL*)templateURL
+    NSString *templateString = [NSString stringWithContentsOfURL:(__bridge NSURL*)templateURL
 														encoding:NSUTF8StringEncoding
 														   error:&error];
     if (templateString == nil) {
@@ -145,7 +140,7 @@ NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error, bool thum
 	
 	// Now load the JavaScript files
 	CFURLRef libsURL = CFBundleCopyResourceURL(bundle, CFSTR("ChemDoodleWeb-libs.js"), NULL, NULL);
-	NSString *libsData = [NSString stringWithContentsOfURL:(NSURL*)libsURL
+	NSString *libsData = [NSString stringWithContentsOfURL:(__bridge NSURL*)libsURL
 												  encoding:NSUTF8StringEncoding
 													 error:&error];
 	if (libsData == nil){
@@ -156,7 +151,7 @@ NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error, bool thum
 	CFRelease(libsURL);
 	
 	CFURLRef mainURL = CFBundleCopyResourceURL(bundle, CFSTR("ChemDoodleWeb.js"), NULL, NULL);
-	NSString *mainData = [NSString stringWithContentsOfURL:(NSURL*)mainURL
+	NSString *mainData = [NSString stringWithContentsOfURL:(__bridge NSURL*)mainURL
 												  encoding:NSUTF8StringEncoding
 													 error:&error];
 	if (mainData == nil){
