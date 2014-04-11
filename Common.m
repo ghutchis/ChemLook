@@ -73,44 +73,34 @@ NSString *babelURL(CFBundleRef bundle, CFURLRef url, int *status, bool singleMol
     return output;
 }
 
-NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error, bool thumbnail) {
+NSString *PreviewUrl(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbnail) {
 	// Save the extension for future comparisons
-	CFStringRef extension = CFURLCopyPathExtension(url);
+	//CFStringRef extension = CFURLCopyPathExtension(url);
+    NSString *extension = [[[url path] pathExtension] lowercaseString];
 	
 	// Now we load the molecule, but it depends on the extension
 	// SDF / MOLfile can be read directly
 	// PDB can be read directly, but we use a different JavaScript function in the HTML
 	NSString *moleculeData = NULL;
 	bool singleMol = true;
-	if (CFStringCompare(extension, CFSTR("sdf"), kCFCompareCaseInsensitive) == 0
-		|| CFStringCompare(extension, CFSTR("mdl"), kCFCompareCaseInsensitive) == 0
-		|| CFStringCompare(extension, CFSTR("mol"), kCFCompareCaseInsensitive) == 0
-        || CFStringCompare(extension, CFSTR("cif"), kCFCompareCaseInsensitive) == 0
-		|| CFStringCompare(extension, CFSTR("pdb"), kCFCompareCaseInsensitive) == 0) {
+    
+    // TODO: Pass SDF through Open Babel because ChemDoodle only reads first molecule
+    NSArray* formats = @[@"sdf", @"mdl", @"mol", @"cif", @"pdb"];
+	if ([formats containsObject:extension]) {
 		// use this file directly, we can read it using JavaScript
-		moleculeData = [NSString stringWithContentsOfURL:(__bridge NSURL*)url
-												encoding:NSUTF8StringEncoding
-												   error:&error];
+		moleculeData = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
 		if (moleculeData == nil) {
-			// an error occurred
-            CFRelease(extension);
-			NSLog(@"Error reading molecule %@\n",
-				  [error localizedFailureReason]);
+			NSLog(@"Error reading molecule %@", [error localizedFailureReason]);
 			return nil;
 		}		
 	} else {
 		// We need to pass this through babel to read
 		int status;
 		// If we have a CDX or CDXML, try to join all molecules into one SDF
-		singleMol = !(CFStringCompare(extension, CFSTR("cdx"), kCFCompareCaseInsensitive) == 0
-					  || CFStringCompare(extension, CFSTR("cdxml"), kCFCompareCaseInsensitive) == 0);
-		
+		singleMol = !([@[@"cdx", @"cdxml"] containsObject:extension]);
 		moleculeData = babelURL(bundle, url, &status, singleMol);
 		if (status != 0 || moleculeData == nil) {
-			// an error occurred
-            CFRelease(extension);
-			NSLog(@"Error reading molecule %@\n",
-				  [error localizedFailureReason]);
+			NSLog(@"Error reading molecule %@", [error localizedFailureReason]);
 			return nil;
 		}		
 	}
