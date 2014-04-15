@@ -5,17 +5,23 @@
 %@
 </script>
 <script>
-<!-- molecule as SDF or PDB -->
-var molecule = '%@';
+<!-- Read molecule and create canvas -->
+var molString = '%@';
+var mol = %@(molString);
+if (mol.hasOwnProperty('molecules')) {
+    mol = mol.molecules[0]
+}
 var width = window.innerWidth * 0.95;
 var height = window.innerHeight * 0.95;
-var transformer = new ChemDoodle.TransformCanvas('transformer', width, height, true);
+var transformer = new ChemDoodle.TransformCanvas('transformer', width, height);
+  transformer.rotate3D = true;
+  transformer.rotationMultMod = 1.6;
   transformer.specs.bonds_clearOverlaps_2D = true;
   transformer.specs.bonds_useJMOLColors = true;
   transformer.specs.bonds_width_2D = 3;
   transformer.specs.atoms_display = false;
   transformer.specs.backgroundColor = 'black';
-transformer.loadMolecule(%@(molecule));
+  transformer.loadMolecule(mol);
 </script>
 <style>
     body {
