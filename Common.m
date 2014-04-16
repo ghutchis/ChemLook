@@ -50,34 +50,33 @@ NSString *TextFromBundle(CFBundleRef bundle, NSString *filename, NSError *error)
     return text;
 }
 
+NSString *EscapeStringForJavascript(NSString *string) {
+    return [[[string stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"]
+              stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"]
+              stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+}
+
 NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbnail) {
     
     // Use Open Babel to generate ChemDoodle JSON from file contents
-    NSString *molData = MolDataFromOpenBabel(url);
-    NSString *readFunc = @"ChemDoodle.readJSON";
-    
-    // If Open Babel fails, read certain file format contents directly
+    NSString *cdjson = MolDataFromOpenBabel(url);
     NSString *extension = [[[url path] pathExtension] lowercaseString];
-    if (molData == nil && [@[@"sdf", @"mdl", @"mol", @"cif", @"pdb", @"xyz"] containsObject:extension]) {
-        molData = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
-        if (error != nil || molData == nil) {
-            return nil;
-        }
-        if ([extension isEqualToString:@"pdb"]) {
-            readFunc = @"ChemDoodle.readPDB";
-        } else if ([extension isEqualToString:@"cif"]) {
-            readFunc = @"ChemDoodle.readCIF";
-        } else if ([extension isEqualToString:@"xyz"]) {
-            readFunc = @"ChemDoodle.readXYZ";
-        } else {
-            readFunc = @"ChemDoodle.readMOL";
+
+    // Read the raw file contents if Open Babel failed or if a cif (for unit cell info)
+    NSString *raw = nil;
+    if ((cdjson == nil) || [extension isEqualToString:@"cif"]) {
+        // Only worth reading the raw file contents if ChemDoodle supports the format
+        if ([@[@"sdf", @"mdl", @"mol", @"cif", @"pdb", @"xyz"] containsObject:extension]) {
+            raw = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
         }
     }
-
-    // Escape molData to insert as javascript variable in template
-    molData = [[[molData stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"]
-                         stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"]
-                         stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    if (cdjson == nil && raw == nil) {
+        return nil;
+    }
+    
+    // Escape strings to insert into template as javascript variables
+    raw = EscapeStringForJavascript(raw);
+    cdjson = EscapeStringForJavascript(cdjson);
 
     // Load the template file as a string for substitution
     NSString *templateName = thumbnail ? @"chemlook-thumb.html" : @"chemlook.html";
@@ -88,6 +87,6 @@ NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbn
     }
 
     // Insert variables into template
-	NSString *output = [NSString stringWithFormat:template, chemdoodle, molData, readFunc];
+	NSString *output = [NSString stringWithFormat:template, chemdoodle, raw, cdjson, extension];
     return output;
 }

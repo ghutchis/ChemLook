@@ -5,9 +5,10 @@
 %@
 </script>
 <script>
-<!-- Load molecule data from string -->
-var molString = '%@';
-var mol = %@(molString);
+<!-- Template variables -->
+var raw = '%@';
+var cdjson = '%@';
+var extension = '%@';
 </script>
 <style>
     body {
@@ -58,22 +59,106 @@ var mol = %@(molString);
         <a href="#transformer" id="threed" class="button active">3D</a>
     </div>
     <script>
+    // Function to scale up coordinates when reading directly from CIF, PDB, XYZ
+    function scaleMol(mol) {
+        var factor = 20;
+        for (var i = 0; i < mol.atoms.length; i++) {
+            atom = mol.atoms[i];
+            atom.x *= factor;
+            atom.y *= factor;
+            atom.z *= factor;
+        }
+        return mol;
+    }
+
     // Use the jQuery embedded within ChemDoodle
     ChemDoodle.lib.jQuery(document).ready(function($) {
         var buttons = $('.button'),
             viewers = $('canvas'),
             width = window.innerWidth,
-            height = window.innerHeight;
+            height = window.innerHeight,
+            sb = new ChemDoodle.informatics.StructureBuilder();
+
         // Start with buttons and viewers hidden
         buttons.hide();
         viewers.hide();
         var transformer = new ChemDoodle.TransformCanvas('transformer', width, height);
         var viewer = new ChemDoodle.ViewerCanvas('viewer', width, height);
 
-        // ChemDoodle JSON format from Open Babel can contain multiple molecules
-        // TODO: Support previewing multiple molecules (for now we take the first)
-        if (mol.hasOwnProperty('molecules')) {
-            mol = mol.molecules[0];
+        // Construct ChemDoodle Molecule from molecule data
+        if (cdjson !== '') {
+            // If available, use the ChemDoodle JSON produced by Open Babel
+            var mol = ChemDoodle.readJSON(cdjson);
+            // TODO: Support previewing multiple molecules (for now we just take the first)
+            if (typeof(mol) !== 'undefined') {
+                mol = mol.molecules[0];
+            }
+        }
+
+        // If no ChemDoodle JSON, use the raw file contents instead with ChemDoodle reader
+        if (typeof(mol) === 'undefined' && raw !== '') {
+            if (extension === 'pdb') {
+                var mol = scaleMol(ChemDoodle.readPDB(raw));
+            } else if (extension === 'cif') {
+                var mol = scaleMol(ChemDoodle.readCIF(raw));
+            } else if (extension === 'xyz') {
+                var mol = scaleMol(ChemDoodle.readXYZ(raw));
+            } else {
+                var mol = ChemDoodle.readMOL(raw);
+            }
+        }
+
+        // Read unit cell (work in progress)
+        if (raw && extension === 'cif') {
+            // Get the unit cell vectors by reading the raw file contents
+            if (mol.hasOwnProperty('unitCellVectors')) {
+                var uv = mol.unitCellVectors;
+            } else {
+                var cifmol = ChemDoodle.readCIF(raw),
+                    uv = cifmol.unitCellVectors;
+            }
+            // TODO: Somehow display unit cell on transformer canvas
+            // The following creates box from fake atoms and bonds - almost there but doesn't quite work right
+//            var f1 = new ChemDoodle.structures.Atom('F', uv.o[0], uv.o[1], uv.o[2]);
+//            var f2 = new ChemDoodle.structures.Atom('F', uv.x[0], uv.x[1], uv.x[2]);
+//            var f3 = new ChemDoodle.structures.Atom('F', uv.xy[0], uv.xy[1], uv.xy[2]);
+//            var f4 = new ChemDoodle.structures.Atom('F', uv.y[0], uv.y[1], uv.y[2]);
+//            var f5 = new ChemDoodle.structures.Atom('F', uv.z[0], uv.z[1], uv.z[2]);
+//            var f6 = new ChemDoodle.structures.Atom('F', uv.xz[0], uv.xz[1], uv.xz[2]);
+//            var f7 = new ChemDoodle.structures.Atom('F', uv.xyz[0], uv.xyz[1], uv.xyz[2]);
+//            var f8 = new ChemDoodle.structures.Atom('F', uv.yz[0], uv.yz[1], uv.yz[2]);
+//            var b1 = new ChemDoodle.structures.Bond(f1, f2, 1);
+//            var b2 = new ChemDoodle.structures.Bond(f2, f3, 1);
+//            var b3 = new ChemDoodle.structures.Bond(f3, f4, 1);
+//            var b4 = new ChemDoodle.structures.Bond(f4, f1, 1);
+//            var b5 = new ChemDoodle.structures.Bond(f5, f6, 1);
+//            var b6 = new ChemDoodle.structures.Bond(f6, f7, 1);
+//            var b7 = new ChemDoodle.structures.Bond(f7, f8, 1);
+//            var b8 = new ChemDoodle.structures.Bond(f8, f5, 1);
+//            var b9 = new ChemDoodle.structures.Bond(f1, f5, 1);
+//            var b10 = new ChemDoodle.structures.Bond(f2, f6, 1);
+//            var b11 = new ChemDoodle.structures.Bond(f3, f7, 1);
+//            var b12 = new ChemDoodle.structures.Bond(f4, f8, 1);
+//            mol.atoms.push(f1);
+//            mol.atoms.push(f2);
+//            mol.atoms.push(f3);
+//            mol.atoms.push(f4);
+//            mol.atoms.push(f5);
+//            mol.atoms.push(f6);
+//            mol.atoms.push(f7);
+//            mol.atoms.push(f8);
+//            mol.bonds.push(b1);
+//            mol.bonds.push(b2);
+//            mol.bonds.push(b3);
+//            mol.bonds.push(b4);
+//            mol.bonds.push(b5);
+//            mol.bonds.push(b6);
+//            mol.bonds.push(b7);
+//            mol.bonds.push(b8);
+//            mol.bonds.push(b9);
+//            mol.bonds.push(b10);
+//            mol.bonds.push(b11);
+//            mol.bonds.push(b12);
         }
 
         // Initialize 3D canvas
@@ -90,6 +175,8 @@ var mol = %@(molString);
         // If no z coordinate, also initialize 2D canvas and display buttons
         var withz = mol.atoms.filter(function(a){return a.z !== 0;});
         if (withz.length === 0) {
+            var mol2d = sb.copy(mol)
+            new ChemDoodle.informatics.HydrogenDeducer().removeHydrogens(mol2d);
             buttons.show();
             viewer.emptyMessage = 'Molecule failed to load';
             viewer.specs.bonds_width_2D = 2;
@@ -102,7 +189,7 @@ var mol = %@(molString);
             viewer.specs.bonds_useJMOLColors = true;
             viewer.specs.atoms_useJMOLColors = true;
             viewer.specs.backgroundColor = 'white';
-            viewer.loadMolecule(mol);
+            viewer.loadMolecule(mol2d);
         }
 
         // Toggle viewers when buttons are clicked
