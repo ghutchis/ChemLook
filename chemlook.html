@@ -5,35 +5,126 @@
 %@
 </script>
 <script>
-<!-- Read molecule and create canvas -->
+<!-- Load molecule data from string -->
 var molString = '%@';
 var mol = %@(molString);
-if (mol.hasOwnProperty('molecules')) {
-    mol = mol.molecules[0]
-}
-var width = window.innerWidth * 0.95;
-var height = window.innerHeight * 0.95;
-var transformer = new ChemDoodle.TransformCanvas('transformer', width, height);
-  transformer.rotate3D = true;
-  transformer.rotationMultMod = 1.6;
-  transformer.specs.bonds_clearOverlaps_2D = true;
-  transformer.specs.bonds_useJMOLColors = true;
-  transformer.specs.bonds_width_2D = 3;
-  transformer.specs.atoms_display = false;
-  transformer.specs.backgroundColor = 'black';
-  transformer.loadMolecule(mol);
 </script>
 <style>
     body {
-      background: #000;
-      text-align: center;
-      vertical-align: center;
-      padding: 0px 0px 0px 0px;
-      margin: 0px 0px 0px 0px;
-      overflow: auto;
+        -webkit-font-smoothing: subpixel-antialiased;
+        -webkit-user-select: none;
+        margin: 0;
+        overflow: hidden;
     }
+    #buttons {
+        margin: 0 auto;
+        text-align: center;
+        width: 184px;
+        position: relative;
+        top: -60px;
+        z-index: 5;
+    }
+    .button {
+        padding: 4px 15px;
+        width: 60px;
+        float: left;
+        color: #0061ce;
+        font: 13px/17px HelveticaNeue, Helvetica, sans-serif;
+        text-decoration: none;
+        text-align: center;
+        border: solid 1px #0061ce;
+    }
+    #twod {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+    }
+    #threed {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-left: none;
+    }
+    .active { background-color: #0061ce; }
+    #twod.active { color: #fff; }
+    #threed.active { color: #000; }
+    #viewer { border: 1px solid #ccc; }
+    canvas { box-sizing: border-box; }
  </style>
 </head>
-<body onResize="window.location.href = window.location.href;">
+<body>
+    <canvas id="viewer"></canvas>
+    <canvas id="transformer"></canvas>
+    <div id="buttons">
+        <a href="#viewer" id="twod" class="button">2D</a>
+        <a href="#transformer" id="threed" class="button active">3D</a>
+    </div>
+    <script>
+    // Use the jQuery embedded within ChemDoodle
+    ChemDoodle.lib.jQuery(document).ready(function($) {
+        var buttons = $('.button'),
+            viewers = $('canvas'),
+            width = window.innerWidth,
+            height = window.innerHeight;
+        // Start with buttons and viewers hidden
+        buttons.hide();
+        viewers.hide();
+        var transformer = new ChemDoodle.TransformCanvas('transformer', width, height);
+        var viewer = new ChemDoodle.ViewerCanvas('viewer', width, height);
+
+        // ChemDoodle JSON format from Open Babel can contain multiple molecules
+        // TODO: Support previewing multiple molecules (for now we take the first)
+        if (mol.hasOwnProperty('molecules')) {
+            mol = mol.molecules[0];
+        }
+
+        // Initialize 3D canvas
+        transformer.emptyMessage = 'Molecule failed to load';
+        transformer.rotate3D = true;
+        transformer.rotationMultMod = 1.6;
+        transformer.specs.bonds_useJMOLColors = true;
+        transformer.specs.bonds_width_2D = 3;
+        transformer.specs.atoms_display = false;
+        transformer.specs.backgroundColor = 'black';
+        transformer.specs.bonds_clearOverlaps_2D = true;
+        transformer.loadMolecule(mol);
+
+        // If no z coordinate, also initialize 2D canvas and display buttons
+        var withz = mol.atoms.filter(function(a){return a.z !== 0;});
+        if (withz.length === 0) {
+            buttons.show();
+            viewer.emptyMessage = 'Molecule failed to load';
+            viewer.specs.bonds_width_2D = 2;
+            viewer.specs.bonds_saturationWidth_2D = .18;
+            viewer.specs.bonds_hashSpacing_2D = 2.5;
+            viewer.specs.atoms_font_size_2D = 12;
+            viewer.specs.atoms_font_families_2D = ['Helvetica', 'Arial', 'sans-serif'];
+            viewer.specs.atoms_displayTerminalCarbonLabels_2D = false;
+            viewer.specs.bonds_clearOverlaps_2D = true;
+            viewer.specs.bonds_useJMOLColors = true;
+            viewer.specs.atoms_useJMOLColors = true;
+            viewer.specs.backgroundColor = 'white';
+            viewer.loadMolecule(mol);
+        }
+
+        // Toggle viewers when buttons are clicked
+        buttons.click(function(e) {
+            e.preventDefault();
+            var activeViewer = $($('.button.active')[0].hash);
+            var nextViewer = $(this.hash);
+            activeViewer.fadeOut(200, function() { nextViewer.fadeIn(200); });
+            buttons.removeClass('active');
+            $(this).addClass('active');
+            return false;
+        });
+
+        // Show 3D by default
+        $('#threed').click();
+
+        // Resize viewers with window
+        $(window).resize(function(e) {
+            viewer.resize(window.innerWidth, window.innerHeight);
+            transformer.resize(window.innerWidth, window.innerHeight);
+        });
+    });
+    </script>
 </body>
 </html>
