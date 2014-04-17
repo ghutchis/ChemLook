@@ -51,6 +51,8 @@
 	<string>${CURRENT_PROJECT_VERSION}</string>
 	<key>CFBundleVersion</key>
 	<string>${CURRENT_PROJECT_VERSION}</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2010-2014 Geoffrey Hutchison</string>
 	<key>CFPlugInDynamicRegisterFunction</key>
 	<string></string>
 	<key>CFPlugInDynamicRegistration</key>

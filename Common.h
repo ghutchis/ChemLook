@@ -1,13 +1,15 @@
 /*
  *  Common.h
  *  Part of ChemLook
- *   by Geoffrey Hutchison
- * 
- *  Based on: QLColorCode
- *  Created by Nathaniel Gray on 12/6/07.
- *  Copyright 2007 Nathaniel Gray.
+ *  Copyright 2010-2014 Geoffrey Hutchison
+ *  Some portions Copyright 2014 Matt Swain
+ *  Licensed under the GPL v2
+ *
+ *  Based on QLColorCode
+ *  Copyright 2007 Nathaniel Gray
  *
  */
+
 #import <CoreFoundation/CoreFoundation.h>
 #import <Foundation/Foundation.h>
 

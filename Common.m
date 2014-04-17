@@ -1,11 +1,12 @@
 /*
  *  Common.m
  *  Part of ChemLook
- *   by Geoffrey Hutchison
+ *  Copyright 2010-2014 Geoffrey Hutchison
+ *  Some portions Copyright 2014 Matt Swain
+ *  Licensed under the GPL v2
  * 
- *  Based on: QLColorCode
- *  Created by Nathaniel Gray on 12/6/07.
- *  Copyright 2007 Nathaniel Gray.
+ *  Based on QLColorCode
+ *  Copyright 2007 Nathaniel Gray
  *
  */
 

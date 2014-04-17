@@ -1,3 +1,14 @@
+/*
+ *  GenerateThumbnailForURL.m
+ *  Part of ChemLook
+ *  Copyright 2010-2014 Geoffrey Hutchison
+ *  Some portions Copyright 2014 Matt Swain
+ *  Licensed under the GPL v2
+ *
+ *  Based on QLColorCode
+ *  Copyright 2007 Nathaniel Gray
+ *
+ */
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreServices/CoreServices.h>
