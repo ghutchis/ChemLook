@@ -47,11 +47,14 @@ NSString *MolDataFromOpenBabel(NSURL *url) {
 
 NSString *TextFromBundle(CFBundleRef bundle, NSString *filename, NSError *error) {
     CFURLRef url = CFBundleCopyResourceURL(bundle, (__bridge CFStringRef)filename, NULL, NULL);
-    NSString *text = [NSString stringWithContentsOfURL:(__bridge NSURL *)url encoding:NSUTF8StringEncoding error:&error];
+    NSString *text = [NSString stringWithContentsOfURL:(__bridge_transfer NSURL *)url encoding:NSUTF8StringEncoding error:&error];
     return text;
 }
 
 NSString *EscapeStringForJavascript(NSString *string) {
+    if (string == nil) {
+        return @"";
+    }
     return [[[[string stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"]
                stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"]
               stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"]
