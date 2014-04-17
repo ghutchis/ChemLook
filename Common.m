@@ -67,7 +67,7 @@ NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbn
     NSString *raw = nil;
     if ((cdjson == nil) || [extension isEqualToString:@"cif"]) {
         // Only worth reading the raw file contents if ChemDoodle supports the format
-        if ([@[@"sdf", @"mdl", @"mol", @"cif", @"pdb", @"xyz"] containsObject:extension]) {
+        if ([@[@"sdf", @"sd", @"mdl", @"mol", @"cif", @"pdb", @"xyz"] containsObject:extension]) {
             raw = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
         }
     }
