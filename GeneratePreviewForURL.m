@@ -27,14 +27,11 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
     @autoreleasepool {
         if (QLPreviewRequestIsCancelled(preview))
             return noErr;
-
-        NSLog(@"%@", contentTypeUTI);
         
         // We need the path of the bundle to get the HTML template and JavaScript
         CFBundleRef bundle = QLPreviewRequestGetGeneratorBundle(preview);
         NSError *error = 0;
         NSString *outputString = PreviewURL(bundle, (__bridge NSURL *)url, error, false);
-        NSLog(@"%@", outputString);
         if (error != nil || outputString == nil) {
             NSLog(@"Error generating preview: %@", [error localizedFailureReason]);
             return noErr;
