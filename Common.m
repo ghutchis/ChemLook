@@ -51,7 +51,8 @@ NSString *TextFromBundle(CFBundleRef bundle, NSString *filename, NSError *error)
 }
 
 NSString *EscapeStringForJavascript(NSString *string) {
-    return [[[string stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"]
+    return [[[[string stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"]
+               stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"]
               stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"]
               stringByReplacingOccurrencesOfString:@"\r" withString:@""];
 }
