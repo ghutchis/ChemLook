@@ -59,17 +59,32 @@ var extension = '%@';
         <a href="#transformer" id="threed" class="button active">3D</a>
     </div>
     <script>
-    // Function to scale up coordinates when reading directly from CIF, PDB, XYZ
+
+    // Scale molecule to a consistent size on canvas
     function scaleMol(mol) {
-        var factor = 20;
-        for (var i = 0; i < mol.atoms.length; i++) {
-            atom = mol.atoms[i];
-            atom.x *= factor;
-            atom.y *= factor;
-            atom.z *= factor;
+        var length = 30;
+        var avBondLength = getAverageBondLength(mol);
+        if (avBondLength !== 0) {
+            var scale = length / avBondLength;
+            for (var i = 0, ii = mol.atoms.length; i < ii; i++) {
+                mol.atoms[i].x *= scale;
+                mol.atoms[i].y *= scale;
+                mol.atoms[i].z *= scale;
+            }
         }
-        return mol;
-    }
+    };
+
+    function getAverageBondLength(mol) {
+        if (mol.bonds.length === 0) {
+            return 0;
+        }
+        var tot = 0;
+        for (var i = 0, ii = mol.bonds.length; i < ii; i++) {
+            tot += mol.bonds[i].getLength3D();
+        }
+        tot /= mol.bonds.length;
+        return tot;
+    };
 
     // Use the jQuery embedded within ChemDoodle
     ChemDoodle.lib.jQuery(document).ready(function($) {
@@ -98,15 +113,16 @@ var extension = '%@';
         // If no ChemDoodle JSON, use the raw file contents instead with ChemDoodle reader
         if (typeof(mol) === 'undefined' && raw !== '') {
             if (extension === 'pdb') {
-                var mol = scaleMol(ChemDoodle.readPDB(raw));
+                var mol = ChemDoodle.readPDB(raw);
             } else if (extension === 'cif') {
-                var mol = scaleMol(ChemDoodle.readCIF(raw));
+                var mol = ChemDoodle.readCIF(raw);
             } else if (extension === 'xyz') {
-                var mol = scaleMol(ChemDoodle.readXYZ(raw));
+                var mol = ChemDoodle.readXYZ(raw);
             } else {
                 var mol = ChemDoodle.readMOL(raw);
             }
         }
+        scaleMol(mol);
 
         // Read unit cell (work in progress)
         if (raw && extension === 'cif') {
