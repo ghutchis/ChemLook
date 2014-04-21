@@ -20,11 +20,20 @@
 				<string>net.sourceforge.openbabel.gamout</string>
 				<string>net.sourceforge.openbabel.qcout</string>
 				<string>com.gaussian.cube</string>
+				<string>com.gaussian.input</string>
 				<string>com.gaussian.output</string>
 				<string>com.gaussian.fchk</string>
 				<string>com.cambridgesoft.cdx</string>
 				<string>com.cambridgesoft.cdxml</string>
-        <string>org.iucr.cif</string>
+				<string>org.iucr.cif</string>
+				<string>com.mdl.molfile</string>
+				<string>com.mdl.sdfile</string>
+				<string>com.ichemlabs.chemdoodle.js</string>
+				<string>com.chemaxon.mrv</string>
+				<string>gov.nih.nlm.ncbi.pubchem.pcjson</string>
+				<string>de.gwdg.gwdg.shelx.ins</string>
+				<string>de.gwdg.gwdg.shelx.res</string>
+				<string>com.hyper.hin</string>
 			</array>
 		</dict>
 	</array>
@@ -42,6 +51,8 @@
 	<string>${CURRENT_PROJECT_VERSION}</string>
 	<key>CFBundleVersion</key>
 	<string>${CURRENT_PROJECT_VERSION}</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>Copyright © 2010-2014 Geoffrey Hutchison</string>
 	<key>CFPlugInDynamicRegisterFunction</key>
 	<string></string>
 	<key>CFPlugInDynamicRegistration</key>
@@ -77,10 +88,10 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
+				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Gaussian CUBE File</string>
+			<string>Gaussian CUBE</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.gaussian.cube</string>
 			<key>UTTypeTagSpecification</key>
@@ -95,31 +106,33 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.plain-text</string>
 				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Gaussian03 Output</string>
+			<string>Gaussian Output</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.gaussian.output</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
+					<string>g92</string>
+					<string>g94</string>
 					<string>g98</string>
 					<string>g03</string>
 					<string>g09</string>
+					<string>gal</string>
+					<string>out</string>
 				</array>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.plain-text</string>
 				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Gaussian FCHK file</string>
+			<string>Gaussian Formatted Checkpoint</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.gaussian.fchk</string>
 			<key>UTTypeTagSpecification</key>
@@ -127,17 +140,18 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>fchk</string>
+					<string>fch</string>
+					<string>fck</string>
 				</array>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.plain-text</string>
 				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Gaussian03 Input</string>
+			<string>Gaussian Input</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.gaussian.input</string>
 			<key>UTTypeTagSpecification</key>
@@ -145,14 +159,15 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>gjf</string>
+					<string>gjc</string>
 					<string>gzmat</string>
+					<string>gau</string>
 				</array>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.plain-text</string>
 				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
@@ -165,13 +180,13 @@
 				<array>
 					<string>gamess</string>
 					<string>gamout</string>
+					<string>gam</string>
 				</array>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.plain-text</string>
 				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
@@ -189,11 +204,10 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
 				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Ghemical project</string>
+			<string>Ghemical Project</string>
 			<key>UTTypeIdentifier</key>
 			<string>net.sourceforge.openbabel.gpr</string>
 			<key>UTTypeTagSpecification</key>
@@ -203,17 +217,19 @@
 					<string>gpr</string>
 				</array>
 				<key>public.mime-type</key>
-				<string>chemical/x-ghemical-project</string>
+				<array>
+					<string>chemical/x-ghemical-project</string>
+					<string>chemical/x-ghemical</string>
+				</array>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
 				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Sybyl Mol2 document</string>
+			<string>Tripos Mol2</string>
 			<key>UTTypeIdentifier</key>
 			<string>net.sourceforge.openbabel.mol2</string>
 			<key>UTTypeTagSpecification</key>
@@ -222,6 +238,7 @@
 				<array>
 					<string>mol2</string>
 					<string>ml2</string>
+					<string>sy2</string>
 				</array>
 				<key>public.mime-type</key>
 				<string>chemical/x-mol2</string>
@@ -230,11 +247,10 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
 				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>XYZ molecule document</string>
+			<string>XYZ Molecule</string>
 			<key>UTTypeIdentifier</key>
 			<string>net.sourceforge.openbabel.xyz</string>
 			<key>UTTypeTagSpecification</key>
@@ -250,11 +266,10 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
 				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Protein Databank document</string>
+			<string>Protein Databank Document</string>
 			<key>UTTypeIdentifier</key>
 			<string>net.sourceforge.openbabel.pdb</string>
 			<key>UTTypeTagSpecification</key>
@@ -271,40 +286,62 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
 				<string>public.text</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>MDL Molfile document</string>
+			<string>MDL Molfile</string>
 			<key>UTTypeIdentifier</key>
-			<string>net.sourceforge.openbabel.mdl</string>
+			<string>com.mdl.molfile</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>mdl</string>
-					<string>mol</string>
-					<string>sdf</string>
-					<string>sd</string>
-				</array>
 				<key>com.apple.ostype</key>
 				<array>
 					<string>mMOL</string>
 					<string>m300</string>
 					<string>MDL~</string>
 				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>mdl</string>
+					<string>mol</string>
+				</array>
 				<key>public.mime-type</key>
-				<string>chemical/x-molfile</string>
+				<array>
+					<string>chemical/x-mdl-molfile</string>
+					<string>chemical/x-molfile</string>
+				</array>
 			</dict>
 		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>MDL SDFile</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.mdl.sdfile</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>sdf</string>
+					<string>sd</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>chemical/x-sdlfile</string>
+					<string>chemical/x-mdl-sdfile</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
 				<string>public.xml</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>Chemical Markup Language document</string>
+			<string>Chemical Markup Language</string>
 			<key>UTTypeIdentifier</key>
 			<string>net.sourceforge.openbabel.cml</string>
 			<key>UTTypeTagSpecification</key>
@@ -323,13 +360,17 @@
 				<string>public.xml</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>CS ChemDraw XML Drawing</string>
+			<string>Cambridgesoft ChemDraw XML</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.cambridgesoft.cdxml</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>com.apple.ostype</key>
 				<string>CdxM</string>
+				<key>public.mime-type</key>
+				<array>
+					<string>chemical/x-cdxml</string>
+				</array>
 				<key>public.filename-extension</key>
 				<array>
 					<string>cdxml</string>
@@ -342,7 +383,7 @@
 				<string>public.data</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>CS ChemDraw Drawing</string>
+			<string>Cambridgesoft ChemDraw Exchange</string>
 			<key>UTTypeIdentifier</key>
 			<string>com.cambridgesoft.cdx</string>
 			<key>UTTypeTagSpecification</key>
@@ -374,6 +415,141 @@
 				</array>
 				<key>public.mime-type</key>
 				<string>chemical/x-cif</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.json</string>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ChemDoodle JSON</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.ichemlabs.chemdoodle.js</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>cdjson</string>
+					<string>cwc.js</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>javascript/x-chemdoodle</string>
+					<string>chemical/x-cdjson</string>
+					<string>chemical/x-chemdoodle-json</string>
+					<string>application/json</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.json</string>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>PubChem JSON</string>
+			<key>UTTypeIdentifier</key>
+			<string>gov.nih.nlm.ncbi.pubchem.pcjson</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>pcjson</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>javascript/x-pubchem</string>
+					<string>chemical/x-pcjson</string>
+					<string>chemical/x-pubchem-json</string>
+					<string>application/json</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.xml</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>ChemAxon Marvin Document</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.chemaxon.mrv</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>mrv</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>chemical/x-chemaxon-mrv</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>SHELX INS</string>
+			<key>UTTypeIdentifier</key>
+			<string>de.gwdg.gwdg.shelx.ins</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>ins</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>chemical/x-shelx</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>SHELX RES</string>
+			<key>UTTypeIdentifier</key>
+			<string>de.gwdg.gwdg.shelx.res</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>res</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>chemical/x-shelx</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>HyperChem HIN</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.hyper.hin</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>hin</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>chemical/x-hin</string>
+				</array>
 			</dict>
 		</dict>
 	</array>

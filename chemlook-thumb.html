@@ -1,16 +1,16 @@
 <html>
 <head>
 <script type="text/javascript">
-<!-- ChemDoodleWeb-libs.js -->
-%@
-</script>
-<script type="text/javascript">
 <!-- ChemDoodleWeb.js -->
 %@
 </script>
 <script>
-<!-- molecule as SDF or PDB -->
-var molecule = '%@';
+<!-- Read molecule and create canvas -->
+var molString = '%@';
+var mol = %@(molString);
+if (mol.hasOwnProperty('molecules')) {
+    mol = mol.molecules[0]
+}
 var width = window.innerWidth * 0.90;
 var height = window.innerHeight * 0.90;
 var transformer = new TransformCanvas('transformer', width, height);
@@ -19,7 +19,7 @@ var transformer = new TransformCanvas('transformer', width, height);
   transformer.specs.bonds_width_2D = 6;
   transformer.specs.atoms_display = false;
   transformer.specs.backgroundColor = 'black';
-  transformer.loadMolecule(%@(molecule));
+  transformer.loadMolecule(mol);
 </script>
 <style>
     body {

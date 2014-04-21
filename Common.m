@@ -1,191 +1,97 @@
 /*
- *  Common.c
+ *  Common.m
  *  Part of ChemLook
- *   by Geoffrey Hutchison
+ *  Copyright 2010-2014 Geoffrey Hutchison
+ *  Some portions Copyright 2014 Matt Swain
+ *  Licensed under the GPL v2
  * 
- *  Based on: QLColorCode
- *  Created by Nathaniel Gray on 12/6/07.
- *  Copyright 2007 Nathaniel Gray.
+ *  Based on QLColorCode
+ *  Copyright 2007 Nathaniel Gray
  *
  */
 
 #import <CoreFoundation/CoreFoundation.h>
 #import <CoreServices/CoreServices.h>
 #import <Foundation/Foundation.h>
-#import <limits.h>  // PATH_MAX
 
 #include "Common.h"
 
-NSString *runTask(NSString *script, NSDictionary *env, int *exitCode) {
+NSString *RunTask(NSString *cmd, int *status) {
     NSTask *task = [[NSTask alloc] init];
-    [task setCurrentDirectoryPath:@"/tmp"];     /* XXX: Fix this */
-    [task setEnvironment:env];
+    [task setEnvironment:[[NSProcessInfo processInfo] environment]];
+    [task setCurrentDirectoryPath:@"/tmp"];
     [task setLaunchPath:@"/bin/sh"];
-    [task setArguments:[NSArray arrayWithObjects:@"-c", script, nil]];
-    
-    NSPipe *pipe;
-    pipe = [NSPipe pipe];
+    [task setArguments:@[@"-c", cmd]];
+    NSPipe *pipe = [NSPipe pipe];
     [task setStandardOutput: pipe];
-    // Let stderr go to the usual place
-    //[task setStandardError: pipe];
-    
-    NSFileHandle *file;
-    file = [pipe fileHandleForReading];
-    
+    NSFileHandle *file = [pipe fileHandleForReading];
     [task launch];
-    
-    NSData *data;
-    data = [file readDataToEndOfFile];
+    NSData *data = [file readDataToEndOfFile];
     [task waitUntilExit];
-    
-    *exitCode = [task terminationStatus];
-    [task release];
-    /* The docs claim this isn't needed, but we leak descriptors otherwise */
+    *status = [task terminationStatus];
     [file closeFile];
-    /*[pipe release];*/
-    
 	NSString* output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     return output;
 }
 
-NSString *pathOfURL(CFURLRef url)
-{
-    NSString *targetCFS = [[(NSURL *)url absoluteURL] path];
-    return targetCFS;
-}
-
-NSString *babelURL(CFBundleRef bundle, CFURLRef url, int *status, bool singleMol)
-{
-    NSString *output = NULL;
-    NSString *targetEsc = pathOfURL(url);
-    
-    // Set up preferences
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *env = [NSMutableDictionary dictionaryWithDictionary:
-                                [[NSProcessInfo processInfo] environment]];
-	[env addEntriesFromDictionary:[defaults persistentDomainForName:myDomain]];
-    
-    NSString *cmd = [NSString stringWithFormat:
-                     @"'/usr/local/bin/babel' %@ '%@' -omol",
-					 singleMol ? @"-l 1" : @"--join",
-                     targetEsc];
-    
-    output = runTask(cmd, env, status);
-    if (*status != 0) {
-        NSLog(@"ChemLook: babel failed with exit code %d.  Command was (%@).", 
-              *status, cmd);
+NSString *MolDataFromOpenBabel(NSURL *url) {
+    int status;
+    NSString *cmd = [NSString stringWithFormat:@"'/usr/local/bin/obabel' '%@' -ocdjson -l 20", [[url absoluteURL] path]];
+    NSString *output = RunTask(cmd, &status);
+    if (status != 0) {
+        NSLog(@"Error running command: %@", cmd);
+        return nil;
     }
     return output;
 }
 
-NSString *PreviewUrl(CFBundleRef bundle, CFURLRef url, NSError *error, bool thumbnail)
-{
-	// Save the extension for future comparisons
-	CFStringRef extension = CFURLCopyPathExtension(url);
-	
-	// Now we load the molecule, but it depends on the extension
-	// SDF / MOLfile can be read directly
-	// PDB can be read directly, but we use a different JavaScript function in the HTML
-	NSString *moleculeData = NULL;
-	bool singleMol = true;
-	if (CFStringCompare(extension, CFSTR("sdf"), kCFCompareCaseInsensitive) == 0
-		|| CFStringCompare(extension, CFSTR("mdl"), kCFCompareCaseInsensitive) == 0
-		|| CFStringCompare(extension, CFSTR("mol"), kCFCompareCaseInsensitive) == 0
-        || CFStringCompare(extension, CFSTR("cif"), kCFCompareCaseInsensitive) == 0
-		|| CFStringCompare(extension, CFSTR("pdb"), kCFCompareCaseInsensitive) == 0) {
-		// use this file directly, we can read it using JavaScript
-		moleculeData = [NSString stringWithContentsOfURL:(NSURL*)url
-												encoding:NSUTF8StringEncoding
-												   error:&error];
-		if (moleculeData == nil) {
-			// an error occurred
-            CFRelease(extension);
-			NSLog(@"Error reading molecule %@\n",
-				  [error localizedFailureReason]);
-			return nil;
-		}		
-	} else {
-		// We need to pass this through babel to read
-		int status;
-		// If we have a CDX or CDXML, try to join all molecules into one SDF
-		singleMol = !(CFStringCompare(extension, CFSTR("cdx"), kCFCompareCaseInsensitive) == 0
-					  || CFStringCompare(extension, CFSTR("cdxml"), kCFCompareCaseInsensitive) == 0);
-		
-		moleculeData = babelURL(bundle, url, &status, singleMol);
-		if (status != 0 || moleculeData == nil) {
-			// an error occurred
-            CFRelease(extension);
-			NSLog(@"Error reading molecule %@\n",
-				  [error localizedFailureReason]);
-			return nil;
-		}		
-	}
-    	
-	// Load the chemlook.html file template as a string for substitution
-	CFURLRef templateURL;
-	if (!thumbnail) {
-		if (singleMol) {
-			templateURL = CFBundleCopyResourceURL(bundle, CFSTR("chemlook.html"), NULL, NULL);
-		} else {
-			templateURL = CFBundleCopyResourceURL(bundle, CFSTR("chemlook-2d.html"), NULL, NULL);
-		}
-	} else {
-		templateURL = CFBundleCopyResourceURL(bundle, CFSTR("chemlook-thumb.html"), NULL, NULL);
-	}
-	
-    NSString *templateString = [NSString stringWithContentsOfURL:(NSURL*)templateURL
-														encoding:NSUTF8StringEncoding
-														   error:&error];
-    if (templateString == nil) {
-		// an error occurred
-		NSLog(@"Error reading template %@\n",
-			  [error localizedFailureReason]);
+NSString *TextFromBundle(CFBundleRef bundle, NSString *filename, NSError *error) {
+    CFURLRef url = CFBundleCopyResourceURL(bundle, (__bridge CFStringRef)filename, NULL, NULL);
+    NSString *text = [NSString stringWithContentsOfURL:(__bridge_transfer NSURL *)url encoding:NSUTF8StringEncoding error:&error];
+    return text;
+}
+
+NSString *EscapeStringForJavascript(NSString *string) {
+    if (string == nil) {
+        return @"";
     }
-	CFRelease(templateURL);
-	
-	// Now load the JavaScript files
-	CFURLRef libsURL = CFBundleCopyResourceURL(bundle, CFSTR("ChemDoodleWeb-libs.js"), NULL, NULL);
-	NSString *libsData = [NSString stringWithContentsOfURL:(NSURL*)libsURL
-												  encoding:NSUTF8StringEncoding
-													 error:&error];
-	if (libsData == nil){
-		// an error occurred
-		NSLog(@"Error reading libs %@\n",
-			  [error localizedFailureReason]);		
-	}
-	CFRelease(libsURL);
-	
-	CFURLRef mainURL = CFBundleCopyResourceURL(bundle, CFSTR("ChemDoodleWeb.js"), NULL, NULL);
-	NSString *mainData = [NSString stringWithContentsOfURL:(NSURL*)mainURL
-												  encoding:NSUTF8StringEncoding
-													 error:&error];
-	if (mainData == nil){
-		// an error occurred
-		NSLog(@"Error reading main %@\n",
-			  [error localizedFailureReason]);		
-	}
-	CFRelease(mainURL);
-	
-	NSString *escapedMol = [[[moleculeData stringByReplacingOccurrencesOfString:@"\n"
-																 withString:@"\\n"]
-                            stringByReplacingOccurrencesOfString:@"'"
-                            withString:@"\\'"]
-                            stringByReplacingOccurrencesOfString:@"\r"
-                            withString:@""];
-	
-	NSString *readFunction = @"ChemDoodle.readMOL";
-	if (CFStringCompare(extension, CFSTR("pdb"), kCFCompareCaseInsensitive) == 0)
-		readFunction = @"ChemDoodle.readPDB";
-    else if (CFStringCompare(extension, CFSTR("cif"), kCFCompareCaseInsensitive) == 0)
-        readFunction = @"ChemDoodle.readCIF";
-	// OK, the template has several strings, so let's format them
-	NSString *outputString = [NSString stringWithFormat:templateString,
-								  libsData,
-								  mainData,
-								  escapedMol,
-								  readFunction,
-								  nil];
-		
-    CFRelease(extension);
-    return outputString;
+    return [[[[string stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"]
+               stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"]
+              stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"]
+              stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+}
+
+NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbnail) {
+    
+    // Use Open Babel to generate ChemDoodle JSON from file contents
+    NSString *cdjson = MolDataFromOpenBabel(url);
+    NSString *extension = [[[url path] pathExtension] lowercaseString];
+
+    // Read the raw file contents if Open Babel failed or if a cif (for unit cell info)
+    NSString *raw = nil;
+    if ((cdjson == nil) || [extension isEqualToString:@"cif"]) {
+        // Only worth reading the raw file contents if ChemDoodle supports the format
+        if ([@[@"sdf", @"sd", @"mdl", @"mol", @"cif", @"pdb", @"xyz"] containsObject:extension]) {
+            raw = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+        }
+    }
+    if (cdjson == nil && raw == nil) {
+        return nil;
+    }
+    
+    // Escape strings to insert into template as javascript variables
+    raw = EscapeStringForJavascript(raw);
+    cdjson = EscapeStringForJavascript(cdjson);
+
+    // Load the template file as a string for substitution
+    NSString *templateName = thumbnail ? @"chemlook-thumb.html" : @"chemlook.html";
+    NSString *template = TextFromBundle(bundle, templateName, error);
+    NSString *chemdoodle = TextFromBundle(bundle, @"ChemDoodleWeb.js", error);
+    if (template == nil || chemdoodle == nil) {
+        return nil;
+    }
+
+    // Insert variables into template
+	NSString *output = [NSString stringWithFormat:template, chemdoodle, raw, cdjson, extension];
+    return output;
 }
