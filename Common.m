@@ -34,9 +34,13 @@ NSString *RunTask(NSString *cmd, int *status) {
     return output;
 }
 
-NSString *MolDataFromOpenBabel(NSURL *url) {
+NSString *MolDataFromOpenBabel(NSURL *url, bool gen2d) {
     int status;
-    NSString *cmd = [NSString stringWithFormat:@"'/usr/local/bin/obabel' '%@' -ocdjson -l 20", [[url absoluteURL] path]];
+    NSString *options = @"-ocdjson -l 20";
+    if (gen2d) {
+        options = [options stringByAppendingString:@" --gen2d"];
+    }
+    NSString *cmd = [NSString stringWithFormat:@"'/usr/local/bin/obabel' '%@' %@", [[url absoluteURL] path], options];
     NSString *output = RunTask(cmd, &status);
     if (status != 0) {
         NSLog(@"Error running command: %@", cmd);
@@ -62,10 +66,11 @@ NSString *EscapeStringForJavascript(NSString *string) {
 }
 
 NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbnail) {
-    
+
     // Use Open Babel to generate ChemDoodle JSON from file contents
-    NSString *cdjson = MolDataFromOpenBabel(url);
     NSString *extension = [[[url path] pathExtension] lowercaseString];
+    bool gen2d = [@[@"smiles", @"smi", @"inchi"] containsObject:extension];
+    NSString *cdjson = MolDataFromOpenBabel(url, gen2d);
 
     // Read the raw file contents if Open Babel failed or if a cif (for unit cell info)
     NSString *raw = nil;

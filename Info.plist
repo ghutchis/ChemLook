@@ -34,6 +34,8 @@
 				<string>de.gwdg.gwdg.shelx.ins</string>
 				<string>de.gwdg.gwdg.shelx.res</string>
 				<string>com.hyper.hin</string>
+				<string>com.daylight.smiles</string>
+				<string>org.iupac.inchi</string>
 			</array>
 		</dict>
 	</array>
@@ -549,6 +551,50 @@
 				<key>public.mime-type</key>
 				<array>
 					<string>chemical/x-hin</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Daylight SMILES</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.daylight.smiles</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>smiles</string>
+					<string>smi</string>
+					<string>can</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>chemical/x-daylight-smiles</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>IUPAC InChI</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.iupac.inchi</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>inchi</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>chemical/x-inchi</string>
 				</array>
 			</dict>
 		</dict>
