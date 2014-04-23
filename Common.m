@@ -10,10 +10,6 @@
  *
  */
 
-#import <CoreFoundation/CoreFoundation.h>
-#import <CoreServices/CoreServices.h>
-#import <Foundation/Foundation.h>
-
 #include "Common.h"
 
 NSString *RunTask(NSString *cmd, int *status) {
@@ -34,12 +30,8 @@ NSString *RunTask(NSString *cmd, int *status) {
     return output;
 }
 
-NSString *MolDataFromOpenBabel(NSURL *url, bool gen2d) {
+NSString *MolDataFromOpenBabel(NSURL *url, NSString *options) {
     int status;
-    NSString *options = @"-ocdjson -l 20";
-    if (gen2d) {
-        options = [options stringByAppendingString:@" --gen2d"];
-    }
     NSString *cmd = [NSString stringWithFormat:@"'/usr/local/bin/obabel' '%@' %@", [[url absoluteURL] path], options];
     NSString *output = RunTask(cmd, &status);
     if (status != 0) {
@@ -65,12 +57,15 @@ NSString *EscapeStringForJavascript(NSString *string) {
               stringByReplacingOccurrencesOfString:@"\r" withString:@""];
 }
 
-NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbnail) {
+NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error) {
+    NSString *extension = [[[url path] pathExtension] lowercaseString];
 
     // Use Open Babel to generate ChemDoodle JSON from file contents
-    NSString *extension = [[[url path] pathExtension] lowercaseString];
-    bool gen2d = [@[@"smiles", @"smi", @"inchi"] containsObject:extension];
-    NSString *cdjson = MolDataFromOpenBabel(url, gen2d);
+    NSString *options = @"-ocdjson -l 20";
+    if ([@[@"smiles", @"smi", @"inchi"] containsObject:extension]) {
+        options = [options stringByAppendingString:@" --gen2d"];
+    }
+    NSString *cdjson = MolDataFromOpenBabel(url, options);
 
     // Read the raw file contents if Open Babel failed or if a cif (for unit cell info)
     NSString *raw = nil;
@@ -89,8 +84,7 @@ NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbn
     cdjson = EscapeStringForJavascript(cdjson);
 
     // Load the template file as a string for substitution
-    NSString *templateName = thumbnail ? @"chemlook-thumb.html" : @"chemlook.html";
-    NSString *template = TextFromBundle(bundle, templateName, error);
+    NSString *template = TextFromBundle(bundle, @"chemlook.html", error);
     NSString *chemdoodle = TextFromBundle(bundle, @"ChemDoodleWeb.js", error);
     if (template == nil || chemdoodle == nil) {
         return nil;
@@ -99,4 +93,18 @@ NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbn
     // Insert variables into template
 	NSString *output = [NSString stringWithFormat:template, chemdoodle, raw, cdjson, extension];
     return output;
+}
+
+NSString *ThumbnailURL(NSURL *url, NSError *error) {
+
+    // Don't bother generating thumbnail for some formats
+    NSString *extension = [[[url path] pathExtension] lowercaseString];
+    if ([@[@"pdb"] containsObject:extension]) {
+        return nil;
+    }
+
+    // Use Open Babel to generate SVG from file contents
+    NSString *options = @"-osvg -xd -xA -xC -xN 1 -xP 600";
+    NSString *svg = MolDataFromOpenBabel(url, options);
+    return svg;
 }
