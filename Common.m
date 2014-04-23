@@ -61,8 +61,8 @@ NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error) {
     NSString *extension = [[[url path] pathExtension] lowercaseString];
 
     // Use Open Babel to generate ChemDoodle JSON from file contents
-    NSString *options = @"-ocdjson -l 20";
-    if ([@[@"smiles", @"smi", @"inchi"] containsObject:extension]) {
+    NSString *options = @"-ocdjson -l 20 -c";
+    if ([@[@"smiles", @"smi", @"can", @"inchi"] containsObject:extension]) {
         options = [options stringByAppendingString:@" --gen2d"];
     }
     NSString *cdjson = MolDataFromOpenBabel(url, options);
