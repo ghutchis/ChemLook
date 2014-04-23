@@ -104,7 +104,9 @@ NSString *ThumbnailURL(NSURL *url, NSError *error) {
     }
 
     // Use Open Babel to generate SVG from file contents
-    NSString *options = @"-osvg -xd -xA -xC -xN 1 -xP 600";
+    NSString *options = @"-osvg -xd -xA -xC -xN 1 -xP 600 --genalias";
     NSString *svg = MolDataFromOpenBabel(url, options);
+    // Increase the font size and make it bold
+    svg = [svg stringByReplacingOccurrencesOfString:@"font-size=\"16\"" withString:@"font-size=\"20\" font-weight=\"bold\""];
     return svg;
 }
