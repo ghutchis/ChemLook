@@ -27,15 +27,13 @@
 		83154A4E1227FAA700ADA178 /* chemlook.html in Resources */ = {isa = PBXBuildFile; fileRef = 83154A4D1227FAA700ADA178 /* chemlook.html */; };
 		8384E5481228B4DB002CD26B /* Common.h in Headers */ = {isa = PBXBuildFile; fileRef = 8384E5461228B4DB002CD26B /* Common.h */; };
 		8384E5491228B4DB002CD26B /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384E5471228B4DB002CD26B /* Common.m */; };
-		83DFEB12134D09F300000E5F /* chemlook-thumb.html in Resources */ = {isa = PBXBuildFile; fileRef = 83DFEB10134D09F300000E5F /* chemlook-thumb.html */; };
 		8D576312048677EA00EA77CD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB77B6FE84183AC02AAC07 /* main.c */; settings = {ATTRIBUTES = (); }; };
-		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
 		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
 		C86B05270671AA6E00DD9006 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C86B05260671AA6E00DD9006 /* CoreServices.framework */; };
 		C944ADE018F82B0A009A4B07 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C944ADDF18F82B0A009A4B07 /* WebKit.framework */; };
-		C944ADE218F82B12009A4B07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C944ADE118F82B12009A4B07 /* Foundation.framework */; };
 		C944ADE518F856B0009A4B07 /* ChemDoodleWeb.js in Resources */ = {isa = PBXBuildFile; fileRef = C944ADE318F85685009A4B07 /* ChemDoodleWeb.js */; };
 		C944ADE918F85749009A4B07 /* ChemLook.qlgenerator in Copy to Library */ = {isa = PBXBuildFile; fileRef = 83C212541225A97E00E22A0B /* ChemLook.qlgenerator */; };
+		C9A387021908062A0057BE50 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A387011908062A0057BE50 /* Cocoa.framework */; };
 		F28CFBFD0A3EC0AF000ABFF5 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F28CFBFC0A3EC0AF000ABFF5 /* ApplicationServices.framework */; };
 		F28CFC030A3EC0C6000ABFF5 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F28CFC020A3EC0C6000ABFF5 /* QuickLook.framework */; };
 /* End PBXBuildFile section */
@@ -76,12 +74,11 @@
 		8384E5461228B4DB002CD26B /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		8384E5471228B4DB002CD26B /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		83C212541225A97E00E22A0B /* ChemLook.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChemLook.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
-		83DFEB10134D09F300000E5F /* chemlook-thumb.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "chemlook-thumb.html"; sourceTree = "<group>"; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C86B05260671AA6E00DD9006 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		C944ADDF18F82B0A009A4B07 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		C944ADE118F82B12009A4B07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C944ADE318F85685009A4B07 /* ChemDoodleWeb.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ChemDoodleWeb.js; sourceTree = "<group>"; };
+		C9A387011908062A0057BE50 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F28CFBFC0A3EC0AF000ABFF5 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
 		F28CFC020A3EC0C6000ABFF5 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = /System/Library/Frameworks/QuickLook.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -91,11 +88,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C944ADE218F82B12009A4B07 /* Foundation.framework in Frameworks */,
+				C9A387021908062A0057BE50 /* Cocoa.framework in Frameworks */,
 				C944ADE018F82B0A009A4B07 /* WebKit.framework in Frameworks */,
-				8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */,
-				C86B05270671AA6E00DD9006 /* CoreServices.framework in Frameworks */,
 				F28CFBFD0A3EC0AF000ABFF5 /* ApplicationServices.framework in Frameworks */,
+				C86B05270671AA6E00DD9006 /* CoreServices.framework in Frameworks */,
 				F28CFC030A3EC0C6000ABFF5 /* QuickLook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,7 +115,7 @@
 		089C1671FE841209C02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C944ADE118F82B12009A4B07 /* Foundation.framework */,
+				C9A387011908062A0057BE50 /* Cocoa.framework */,
 				C944ADDF18F82B0A009A4B07 /* WebKit.framework */,
 				F28CFC020A3EC0C6000ABFF5 /* QuickLook.framework */,
 				F28CFBFC0A3EC0AF000ABFF5 /* ApplicationServices.framework */,
@@ -132,9 +128,8 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C944ADE318F85685009A4B07 /* ChemDoodleWeb.js */,
 				83154A4D1227FAA700ADA178 /* chemlook.html */,
-				83DFEB10134D09F300000E5F /* chemlook-thumb.html */,
+				C944ADE318F85685009A4B07 /* ChemDoodleWeb.js */,
 				8D576317048677EA00EA77CD /* Info.plist */,
 				8D5B49A704867FD3000E48DA /* InfoPlist.strings */,
 			);
@@ -233,7 +228,6 @@
 				C944ADE518F856B0009A4B07 /* ChemDoodleWeb.js in Resources */,
 				8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */,
 				83154A4E1227FAA700ADA178 /* chemlook.html in Resources */,
-				83DFEB12134D09F300000E5F /* chemlook-thumb.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
