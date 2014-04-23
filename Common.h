@@ -13,4 +13,5 @@
 #import <CoreFoundation/CoreFoundation.h>
 #import <Foundation/Foundation.h>
 
-NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error, bool thumbnail);
+NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error);
+NSString *ThumbnailURL(NSURL *url, NSError *error);
