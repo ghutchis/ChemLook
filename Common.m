@@ -85,13 +85,15 @@ NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error) {
 
     // Load the template file as a string for substitution
     NSString *template = TextFromBundle(bundle, @"chemlook.html", error);
+    NSString *css = TextFromBundle(bundle, @"style.css", error);
     NSString *chemdoodle = TextFromBundle(bundle, @"ChemDoodleWeb.js", error);
-    if (template == nil || chemdoodle == nil) {
+    NSString *js = TextFromBundle(bundle, @"script.js", error);
+    if (template == nil || chemdoodle == nil || css == nil || js == nil) {
         return nil;
     }
 
     // Insert variables into template
-	NSString *output = [NSString stringWithFormat:template, chemdoodle, raw, cdjson, extension];
+	NSString *output = [NSString stringWithFormat:template, css, chemdoodle, raw, cdjson, extension, js];
     return output;
 }
 
