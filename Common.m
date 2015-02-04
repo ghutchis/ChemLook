@@ -100,7 +100,7 @@ NSString *ThumbnailURL(NSURL *url, NSError *error) {
 
     // Don't bother generating thumbnail for some formats
     NSString *extension = [[[url path] pathExtension] lowercaseString];
-    if ([@[@"pdb"] containsObject:extension]) {
+    if ([@[@"pdb", @"cif"] containsObject:extension]) {
         return nil;
     }
 
