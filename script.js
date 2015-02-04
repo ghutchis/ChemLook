@@ -1,17 +1,20 @@
 // Scale molecule to a consistent size on canvas
-function scaleMol(mol) {
-    var length = 30;
-    var avBondLength = getAverageBondLength(mol);
+function getScaledMol(mol, length) {
+    var sb = new ChemDoodle.informatics.StructureBuilder(),
+    avBondLength = getAverageBondLength(mol),
+    scaledMol = sb.copy(mol);
     if (avBondLength !== 0) {
         var scale = length / avBondLength;
-        for (var i = 0, ii = mol.atoms.length; i < ii; i++) {
-            mol.atoms[i].x *= scale;
-            mol.atoms[i].y *= scale;
-            mol.atoms[i].z *= scale;
+        for (var i = 0, ii = scaledMol.atoms.length; i < ii; i++) {
+            scaledMol.atoms[i].x *= scale;
+            scaledMol.atoms[i].y *= scale;
+            scaledMol.atoms[i].z *= scale;
         }
     }
+    return scaledMol;
 };
 
+// Get the average length of all bonds in a molecule
 function getAverageBondLength(mol) {
     if (mol.bonds.length === 0) {
         return 0;
@@ -29,8 +32,7 @@ ChemDoodle.lib.jQuery(document).ready(function($) {
     var buttons = $('.button'),
     viewers = $('canvas'),
     width = window.innerWidth,
-    height = window.innerHeight,
-    sb = new ChemDoodle.informatics.StructureBuilder();
+    height = window.innerHeight;
 
     // Start with buttons and viewers hidden
     buttons.hide();
@@ -55,7 +57,8 @@ ChemDoodle.lib.jQuery(document).ready(function($) {
     } else {
         mol = ChemDoodle.readMOL(molstring);
     }
-    scaleMol(mol);
+
+    var mol3d = getScaledMol(mol, 30);
 
     // Initialize 3D canvas
     transformer.emptyMessage = 'Molecule failed to load';
@@ -66,12 +69,12 @@ ChemDoodle.lib.jQuery(document).ready(function($) {
     transformer.specs.atoms_display = false;
     transformer.specs.backgroundColor = 'black';
     transformer.specs.bonds_clearOverlaps_2D = true;
-    transformer.loadMolecule(mol);
+    transformer.loadMolecule(mol3d);
 
     // If no z coordinate, also initialize 2D canvas and display buttons
     var withz = mol.atoms.filter(function(a){return a.z !== 0;});
     if (withz.length === 0) {
-        var mol2d = sb.copy(mol)
+        var mol2d = getScaledMol(mol, 30);
         new ChemDoodle.informatics.HydrogenDeducer().removeHydrogens(mol2d);
         buttons.show();
         viewer.emptyMessage = 'Molecule failed to load';
