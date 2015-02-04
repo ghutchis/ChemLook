@@ -10,29 +10,29 @@
 	<string>ChemLook</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>CBE6A3A5-4186-4F24-ACE3-0930EC33DC2A</key>
+		<key>3BDE7EF95B76074260EB158608C6BCC506C7D175</key>
 		<string>https://github.com/ghutchis/ChemLook.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ChemLook.xcodeproj/project.xcworkspace</string>
+	<string>ChemLook.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>CBE6A3A5-4186-4F24-ACE3-0930EC33DC2A</key>
+		<key>3BDE7EF95B76074260EB158608C6BCC506C7D175</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/ghutchis/ChemLook.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>CBE6A3A5-4186-4F24-ACE3-0930EC33DC2A</string>
+	<string>3BDE7EF95B76074260EB158608C6BCC506C7D175</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CBE6A3A5-4186-4F24-ACE3-0930EC33DC2A</string>
+			<string>3BDE7EF95B76074260EB158608C6BCC506C7D175</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ChemLook</string>
 		</dict>

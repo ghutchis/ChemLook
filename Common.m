@@ -52,9 +52,9 @@ NSString *EscapeStringForJavascript(NSString *string) {
         return @"";
     }
     return [[[[string stringByReplacingOccurrencesOfString:@"\\" withString:@"\\\\"]
-               stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"]
-              stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"]
-              stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+                      stringByReplacingOccurrencesOfString:@"\n" withString:@"\\n"]
+                      stringByReplacingOccurrencesOfString:@"'" withString:@"\\'"]
+                      stringByReplacingOccurrencesOfString:@"\r" withString:@""];
 }
 
 NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error) {
