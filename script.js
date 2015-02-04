@@ -27,29 +27,53 @@ function getAverageBondLength(mol) {
     return tot;
 };
 
-// Use the jQuery embedded within ChemDoodle
-ChemDoodle.lib.jQuery(document).ready(function($) {
-    var buttons = $('.button'),
-    viewers = $('canvas'),
-    width = window.innerWidth,
-    height = window.innerHeight;
+// Initialize 3D canvas viewer
+function init3dView() {
+    var viewer = new ChemDoodle.TransformCanvas('view3d', window.innerWidth, window.innerHeight);
+    viewer.emptyMessage = 'Molecule failed to load';
+    viewer.rotate3D = true;
+    viewer.rotationMultMod = 1.6;
+    viewer.specs.bonds_useJMOLColors = true;
+    viewer.specs.bonds_width_2D = 3;
+    viewer.specs.atoms_display = false;
+    viewer.specs.backgroundColor = 'black';
+    viewer.specs.bonds_clearOverlaps_2D = true;
+    return viewer;
+}
 
-    // Start with buttons and viewers hidden
-    buttons.hide();
-    viewers.hide();
-    var transformer = new ChemDoodle.TransformCanvas('transformer', width, height);
-    var viewer = new ChemDoodle.ViewerCanvas('viewer', width, height);
+// Initialize 2D canvas viewer
+function init2dView() {
+    var viewer = new ChemDoodle.ViewerCanvas('view2d', window.innerWidth, window.innerHeight);
+    viewer.emptyMessage = 'Molecule failed to load';
+    viewer.specs.bonds_width_2D = 2;
+    viewer.specs.bonds_saturationWidth_2D = .18;
+    viewer.specs.bonds_hashSpacing_2D = 2.5;
+    viewer.specs.atoms_font_size_2D = 12;
+    viewer.specs.atoms_font_families_2D = ['Helvetica', 'Arial', 'sans-serif'];
+    viewer.specs.atoms_displayTerminalCarbonLabels_2D = false;
+    viewer.specs.bonds_clearOverlaps_2D = true;
+    viewer.specs.bonds_useJMOLColors = true;
+    viewer.specs.atoms_useJMOLColors = true;
+    viewer.specs.backgroundColor = 'white';
+    return viewer;
+}
+
+ChemDoodle.lib.jQuery(document).ready(function($) {
+    var buttons = $('.button').hide(),
+        viewers = $('canvas').hide(),
+        view3d = init3dView(),
+        view2d = init2dView(),
+        mol = undefined,
+        unitcell = undefined;
 
     // Construct ChemDoodle Molecule from molecule data
-    var mol = undefined,
-        unitcell = undefined;
     if (extension === 'cdjson') {
         var parsed = ChemDoodle.readJSON(molstring);
         if (typeof parsed !== 'undefined' && typeof parsed.molecules[0] !== 'undefined') {
             mol = parsed.molecules[0];
         }
     } else if (extension === 'pdb') {
-        mol = ChemDoodle.readPDB(molstring);
+        mol = ChemDoodle.readPDB(molstring, 1);
     } else if (extension === 'cif') {
         var parsed = ChemDoodle.readCIF(molstring);
         mol = parsed.molecule;
@@ -58,37 +82,17 @@ ChemDoodle.lib.jQuery(document).ready(function($) {
         mol = ChemDoodle.readMOL(molstring);
     }
 
+    // Load mol into 3D viewer
     var mol3d = getScaledMol(mol, 30);
+    view3d.loadMolecule(mol3d);
 
-    // Initialize 3D canvas
-    transformer.emptyMessage = 'Molecule failed to load';
-    transformer.rotate3D = true;
-    transformer.rotationMultMod = 1.6;
-    transformer.specs.bonds_useJMOLColors = true;
-    transformer.specs.bonds_width_2D = 3;
-    transformer.specs.atoms_display = false;
-    transformer.specs.backgroundColor = 'black';
-    transformer.specs.bonds_clearOverlaps_2D = true;
-    transformer.loadMolecule(mol3d);
-
-    // If no z coordinate, also initialize 2D canvas and display buttons
+    // If no z coordinate, also load mol into 2D viewer and display buttons
     var withz = mol.atoms.filter(function(a){return a.z !== 0;});
     if (withz.length === 0) {
         var mol2d = getScaledMol(mol, 30);
         new ChemDoodle.informatics.HydrogenDeducer().removeHydrogens(mol2d);
+        view2d.loadMolecule(mol2d);
         buttons.show();
-        viewer.emptyMessage = 'Molecule failed to load';
-        viewer.specs.bonds_width_2D = 2;
-        viewer.specs.bonds_saturationWidth_2D = .18;
-        viewer.specs.bonds_hashSpacing_2D = 2.5;
-        viewer.specs.atoms_font_size_2D = 12;
-        viewer.specs.atoms_font_families_2D = ['Helvetica', 'Arial', 'sans-serif'];
-        viewer.specs.atoms_displayTerminalCarbonLabels_2D = false;
-        viewer.specs.bonds_clearOverlaps_2D = true;
-        viewer.specs.bonds_useJMOLColors = true;
-        viewer.specs.atoms_useJMOLColors = true;
-        viewer.specs.backgroundColor = 'white';
-        viewer.loadMolecule(mol2d);
     }
 
     // Toggle viewers when buttons are clicked
@@ -103,11 +107,11 @@ ChemDoodle.lib.jQuery(document).ready(function($) {
     });
 
     // Show 3D by default
-    $('#threed').click();
+    $('#button3d').click();
 
     // Resize viewers with window
     $(window).resize(function(e) {
-        viewer.resize(window.innerWidth, window.innerHeight);
-        transformer.resize(window.innerWidth, window.innerHeight);
+        view2d.resize(window.innerWidth, window.innerHeight);
+        view3d.resize(window.innerWidth, window.innerHeight);
     });
 });
