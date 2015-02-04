@@ -62,59 +62,6 @@ ChemDoodle.lib.jQuery(document).ready(function($) {
     }
     scaleMol(mol);
 
-    // Read unit cell (work in progress)
-    if (raw && extension === 'cif') {
-        // Get the unit cell vectors by reading the raw file contents
-        if (mol.hasOwnProperty('unitCellVectors')) {
-            var uv = mol.unitCellVectors;
-        } else {
-            var cifmol = ChemDoodle.readCIF(raw),
-            uv = cifmol.unitCellVectors;
-        }
-        // TODO: Somehow display unit cell on transformer canvas
-        // The following creates box from fake atoms and bonds - almost there but doesn't quite work right
-        //            var f1 = new ChemDoodle.structures.Atom('F', uv.o[0], uv.o[1], uv.o[2]);
-        //            var f2 = new ChemDoodle.structures.Atom('F', uv.x[0], uv.x[1], uv.x[2]);
-        //            var f3 = new ChemDoodle.structures.Atom('F', uv.xy[0], uv.xy[1], uv.xy[2]);
-        //            var f4 = new ChemDoodle.structures.Atom('F', uv.y[0], uv.y[1], uv.y[2]);
-        //            var f5 = new ChemDoodle.structures.Atom('F', uv.z[0], uv.z[1], uv.z[2]);
-        //            var f6 = new ChemDoodle.structures.Atom('F', uv.xz[0], uv.xz[1], uv.xz[2]);
-        //            var f7 = new ChemDoodle.structures.Atom('F', uv.xyz[0], uv.xyz[1], uv.xyz[2]);
-        //            var f8 = new ChemDoodle.structures.Atom('F', uv.yz[0], uv.yz[1], uv.yz[2]);
-        //            var b1 = new ChemDoodle.structures.Bond(f1, f2, 1);
-        //            var b2 = new ChemDoodle.structures.Bond(f2, f3, 1);
-        //            var b3 = new ChemDoodle.structures.Bond(f3, f4, 1);
-        //            var b4 = new ChemDoodle.structures.Bond(f4, f1, 1);
-        //            var b5 = new ChemDoodle.structures.Bond(f5, f6, 1);
-        //            var b6 = new ChemDoodle.structures.Bond(f6, f7, 1);
-        //            var b7 = new ChemDoodle.structures.Bond(f7, f8, 1);
-        //            var b8 = new ChemDoodle.structures.Bond(f8, f5, 1);
-        //            var b9 = new ChemDoodle.structures.Bond(f1, f5, 1);
-        //            var b10 = new ChemDoodle.structures.Bond(f2, f6, 1);
-        //            var b11 = new ChemDoodle.structures.Bond(f3, f7, 1);
-        //            var b12 = new ChemDoodle.structures.Bond(f4, f8, 1);
-        //            mol.atoms.push(f1);
-        //            mol.atoms.push(f2);
-        //            mol.atoms.push(f3);
-        //            mol.atoms.push(f4);
-        //            mol.atoms.push(f5);
-        //            mol.atoms.push(f6);
-        //            mol.atoms.push(f7);
-        //            mol.atoms.push(f8);
-        //            mol.bonds.push(b1);
-        //            mol.bonds.push(b2);
-        //            mol.bonds.push(b3);
-        //            mol.bonds.push(b4);
-        //            mol.bonds.push(b5);
-        //            mol.bonds.push(b6);
-        //            mol.bonds.push(b7);
-        //            mol.bonds.push(b8);
-        //            mol.bonds.push(b9);
-        //            mol.bonds.push(b10);
-        //            mol.bonds.push(b11);
-        //            mol.bonds.push(b12);
-    }
-
     // Initialize 3D canvas
     transformer.emptyMessage = 'Molecule failed to load';
     transformer.rotate3D = true;
