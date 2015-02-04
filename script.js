@@ -32,12 +32,23 @@ function init3dView() {
     var viewer = new ChemDoodle.TransformCanvas('view3d', window.innerWidth, window.innerHeight);
     viewer.emptyMessage = 'Molecule failed to load';
     viewer.rotate3D = true;
-    viewer.rotationMultMod = 1.6;
     viewer.specs.bonds_useJMOLColors = true;
     viewer.specs.bonds_width_2D = 3;
     viewer.specs.atoms_display = false;
     viewer.specs.backgroundColor = 'black';
     viewer.specs.bonds_clearOverlaps_2D = true;
+    return viewer;
+}
+
+// Initialize 3D WebGL canvas viewer
+function init3dWebglView() {
+    var viewer = new ChemDoodle.TransformCanvas3D('view3d', window.innerWidth, window.innerHeight);
+    viewer.emptyMessage = 'Molecule failed to load';
+    viewer.specs.set3DRepresentation('Stick');
+    viewer.specs.bonds_useJMOLColors = true;
+    viewer.specs.backgroundColor = 'black';
+    viewer.specs.shapes_color = '#0f0';
+    viewer.specs.shapes_lineWidth = 2;
     return viewer;
 }
 
@@ -62,7 +73,7 @@ function init2dView() {
 ChemDoodle.lib.jQuery(document).ready(function($) {
     var buttons = $('.button').hide(),
         viewers = $('canvas').hide(),
-        view3d = init3dView(),
+        view3d = ChemDoodle.featureDetection.supports_webgl() ? init3dWebglView() : init3dView(),
         view2d = init2dView(),
         mol = undefined,
         unitcell = undefined;
@@ -84,8 +95,17 @@ ChemDoodle.lib.jQuery(document).ready(function($) {
     }
 
     // Load mol into 3D viewer
-    var mol3d = getScaledMol(mol, 30);
-    view3d.loadMolecule(mol3d);
+    if (view3d instanceof ChemDoodle.TransformCanvas3D) {
+        var mol3d = extension !== 'pdb' && extension !== 'cif' ? getScaledMol(mol, 5) : mol;
+        if (typeof unitcell !== 'undefined') {
+            view3d.loadContent([mol3d], [unitcell]);
+        } else {
+            view3d.loadMolecule(mol3d);
+        }
+    } else {
+        var mol3d = getScaledMol(mol, 30);
+        view3d.loadMolecule(mol3d);
+    }
 
     // If no z coordinate, also load mol into 2D viewer and display buttons
     var withz = mol.atoms.filter(function(a){return a.z !== 0;});
