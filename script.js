@@ -43,12 +43,13 @@ function init3dView() {
 
 // Initialize 2D canvas viewer
 function init2dView() {
-    var viewer = new ChemDoodle.ViewerCanvas('view2d', window.innerWidth, window.innerHeight);
+    var viewer = new ChemDoodle.TransformCanvas('view2d', window.innerWidth, window.innerHeight);
     viewer.emptyMessage = 'Molecule failed to load';
     viewer.specs.bonds_width_2D = 2;
     viewer.specs.bonds_saturationWidth_2D = .18;
     viewer.specs.bonds_hashSpacing_2D = 2.5;
-    viewer.specs.atoms_font_size_2D = 12;
+    viewer.specs.bonds_atomLabelBuffer_2D = 3;
+    viewer.specs.atoms_font_size_2D = 15;
     viewer.specs.atoms_font_families_2D = ['Helvetica', 'Arial', 'sans-serif'];
     viewer.specs.atoms_displayTerminalCarbonLabels_2D = false;
     viewer.specs.bonds_clearOverlaps_2D = true;
@@ -89,7 +90,7 @@ ChemDoodle.lib.jQuery(document).ready(function($) {
     // If no z coordinate, also load mol into 2D viewer and display buttons
     var withz = mol.atoms.filter(function(a){return a.z !== 0;});
     if (withz.length === 0) {
-        var mol2d = getScaledMol(mol, 30);
+        var mol2d = getScaledMol(mol, 35);
         new ChemDoodle.informatics.HydrogenDeducer().removeHydrogens(mol2d);
         view2d.loadMolecule(mol2d);
         buttons.show();
