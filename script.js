@@ -39,26 +39,21 @@ ChemDoodle.lib.jQuery(document).ready(function($) {
     var viewer = new ChemDoodle.ViewerCanvas('viewer', width, height);
 
     // Construct ChemDoodle Molecule from molecule data
-    if (cdjson !== '') {
-        // If available, use the ChemDoodle JSON produced by Open Babel
-        var mol = ChemDoodle.readJSON(cdjson);
-        // TODO: Support previewing multiple molecules (for now we just take the first)
-        if (typeof(mol) !== 'undefined') {
-            mol = mol.molecules[0];
+    var mol = undefined,
+        unitcell = undefined;
+    if (extension === 'cdjson') {
+        var parsed = ChemDoodle.readJSON(molstring);
+        if (typeof parsed !== 'undefined' && typeof parsed.molecules[0] !== 'undefined') {
+            mol = parsed.molecules[0];
         }
-    }
-
-    // If no ChemDoodle JSON, use the raw file contents instead with ChemDoodle reader
-    if (typeof(mol) === 'undefined' && raw !== '') {
-        if (extension === 'pdb') {
-            var mol = ChemDoodle.readPDB(raw);
-        } else if (extension === 'cif') {
-            var mol = ChemDoodle.readCIF(raw);
-        } else if (extension === 'xyz') {
-            var mol = ChemDoodle.readXYZ(raw);
-        } else {
-            var mol = ChemDoodle.readMOL(raw);
-        }
+    } else if (extension === 'pdb') {
+        mol = ChemDoodle.readPDB(molstring);
+    } else if (extension === 'cif') {
+        var parsed = ChemDoodle.readCIF(molstring);
+        mol = parsed.molecule;
+        unitcell = parsed.unitCell;
+    } else {
+        mol = ChemDoodle.readMOL(molstring);
     }
     scaleMol(mol);
 

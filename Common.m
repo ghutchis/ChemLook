@@ -59,41 +59,40 @@ NSString *EscapeStringForJavascript(NSString *string) {
 
 NSString *PreviewURL(CFBundleRef bundle, NSURL *url, NSError *error) {
     NSString *extension = [[[url path] pathExtension] lowercaseString];
+    NSString *mol = nil;
 
-    // Use Open Babel to generate ChemDoodle JSON from file contents
-    NSString *options = @"-ocdjson -l 20 -c";
-    if ([@[@"smiles", @"smi", @"can", @"inchi"] containsObject:extension]) {
-        options = [options stringByAppendingString:@" --gen2d"];
+    // Read the raw file contents if ChemDoodle supports the format
+    if ([@[@"sdf", @"sd", @"mdl", @"mol", @"cif", @"pdb", @"xyz"] containsObject:extension]) {
+        mol = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
     }
-    NSString *cdjson = MolDataFromOpenBabel(url, options);
 
-    // Read the raw file contents if Open Babel failed or if a cif (for unit cell info)
-    NSString *raw = nil;
-    if ((cdjson == nil) || [extension isEqualToString:@"cif"]) {
-        // Only worth reading the raw file contents if ChemDoodle supports the format
-        if ([@[@"sdf", @"sd", @"mdl", @"mol", @"cif", @"pdb", @"xyz"] containsObject:extension]) {
-            raw = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+    // Use Open Babel to generate ChemDoodle JSON from file (unless CIF or PDB)
+    if (![@[@"cif", @"pdb"] containsObject:extension]) {
+        NSString *options = @"-ocdjson -l 20 -c";
+        if ([@[@"smiles", @"smi", @"can", @"inchi"] containsObject:extension]) {
+            options = [options stringByAppendingString:@" --gen2d"];
+        }
+        NSString *cdjson = MolDataFromOpenBabel(url, options);
+        if (!(cdjson == nil)) {
+            extension = @"cdjson";
+            mol = cdjson;
         }
     }
-    if (cdjson == nil && raw == nil) {
-        return nil;
-    }
-    
+
     // Escape strings to insert into template as javascript variables
-    raw = EscapeStringForJavascript(raw);
-    cdjson = EscapeStringForJavascript(cdjson);
+    mol = EscapeStringForJavascript(mol);
 
     // Load the template file as a string for substitution
     NSString *template = TextFromBundle(bundle, @"chemlook.html", error);
     NSString *css = TextFromBundle(bundle, @"style.css", error);
     NSString *chemdoodle = TextFromBundle(bundle, @"ChemDoodleWeb.js", error);
     NSString *js = TextFromBundle(bundle, @"script.js", error);
-    if (template == nil || chemdoodle == nil || css == nil || js == nil) {
+    if (mol == nil || extension == nil || template == nil || chemdoodle == nil || css == nil || js == nil) {
         return nil;
     }
 
     // Insert variables into template
-	NSString *output = [NSString stringWithFormat:template, css, chemdoodle, raw, cdjson, extension, js];
+    NSString *output = [NSString stringWithFormat:template, css, chemdoodle, extension, mol, js];
     return output;
 }
 
