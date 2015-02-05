@@ -36,6 +36,13 @@
 				<string>com.hyper.hin</string>
 				<string>com.daylight.smiles</string>
 				<string>org.iupac.inchi</string>
+				<string>com.cdx</string>
+				<string>com.cdxml</string>
+				<string>com.cml</string>
+				<string>com.inchi</string>
+				<string>com.mol2</string>
+				<string>com.pdb</string>
+				<string>com.xyz</string>
 			</array>
 		</dict>
 	</array>
