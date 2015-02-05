@@ -36,6 +36,13 @@
 				<string>com.hyper.hin</string>
 				<string>com.daylight.smiles</string>
 				<string>org.iupac.inchi</string>
+				<string>com.cdx</string>
+				<string>com.cdxml</string>
+				<string>com.cml</string>
+				<string>com.inchi</string>
+				<string>com.mol2</string>
+				<string>com.pdb</string>
+				<string>com.xyz</string>
 			</array>
 		</dict>
 	</array>
@@ -78,9 +85,9 @@
 	<key>QLSupportsConcurrentRequests</key>
 	<true/>
 	<key>QLPreviewHeight</key>
-	<integer>450</integer>
+	<integer>600</integer>
 	<key>QLPreviewWidth</key>
-	<integer>450</integer>
+	<integer>800</integer>
 	<key>QLThumbnailMinimumSize</key>
 	<integer>64</integer>
 	<key>QLDisableIconCorners</key>
